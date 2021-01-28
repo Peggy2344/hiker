@@ -61,7 +61,7 @@
       <NewItem />
     </div>
     <v-container class="d-flex flex-wrap justify-center homePage">
-      <v-row class="d-flex flex-column col-12 col-lg-6">
+      <v-row class="d-flex flex-wrap justify-center col-12 col-lg-6">
         <v-col cols="12" class="d-flex justify-center">
           <div
             class="col-12 d-flex flex-column flex-sm-row align-center justify-space-around bg-1 pa-10"
