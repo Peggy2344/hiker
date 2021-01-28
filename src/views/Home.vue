@@ -217,13 +217,13 @@
 
 <script>
 // @ is an alias to /src
-import Navbar from "@/components/Navbar.vue";
+import Navbar from '@/components/Navbar.vue';
 // import HotSale from '@/components/HotSale.vue'
-import NewItem from "@/components/NewItem.vue";
-import Footer from "@/components/Footer.vue";
+import NewItem from '@/components/NewItem.vue';
+import Footer from '@/components/Footer.vue';
 
 export default {
-  name: "Home",
+  name: 'Home',
   components: {
     Navbar,
     // HotSale,
@@ -233,30 +233,30 @@ export default {
   data() {
     return {
       slogan: [
-        "YOUR NEXT HIKING OUTFIT",
-        "YOUR NEXT HIKING OUTFIT",
-        "YOUR NEXT HIKING OUTFIT",
-        "YOUR NEXT HIKING OUTFIT",
-        "YOUR NEXT HIKING OUTFIT",
+        'YOUR NEXT HIKING OUTFIT',
+        'YOUR NEXT HIKING OUTFIT',
+        'YOUR NEXT HIKING OUTFIT',
+        'YOUR NEXT HIKING OUTFIT',
+        'YOUR NEXT HIKING OUTFIT',
       ],
       pictures: [
         {
-          src: require("../assets/1.jpeg"),
+          src: require('../assets/1.jpeg'),
         },
         {
-          src: require("../assets/2.jpeg"),
+          src: require('../assets/2.jpeg'),
         },
         {
-          src: require("../assets/3.jpeg"),
+          src: require('../assets/3.jpeg'),
         },
         {
-          src: require("../assets/4.jpeg"),
+          src: require('../assets/4.jpeg'),
         },
         {
-          src: require("../assets/5.jpeg"),
+          src: require('../assets/5.jpeg'),
         },
       ],
-      slides: ["YOUR NEXT HIKING OUTFIT", "Second", "Third", "Fourth", "Fifth"],
+      slides: ['YOUR NEXT HIKING OUTFIT', 'Second', 'Third', 'Fourth', 'Fifth'],
     };
   },
 };
