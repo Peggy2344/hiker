@@ -16,7 +16,7 @@
           transition="fade-transition"
         >
         <div class="white--text absolute slogan col-3 col-lg-1 d-flex justify-center align-center">
-          <h1 class="text-h5 text-sm-h3 font-weight-bold slogan_line_height">YOUR NEXT HIKING OUTFIT </h1>
+          <h1 class="text-h5 text-sm-h3 font-weight-bold slogan_line_height">YOUR NEXT NEXT HIKING OUTFIT </h1>
         </div>
         </v-carousel-item>
       </v-carousel>
