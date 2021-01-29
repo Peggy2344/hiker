@@ -4,13 +4,13 @@ export const register = (params) => {
   return api.post('/users/register', params)
 }
 export const login = (params) => {
-  return api.post('/users/login', params)
+  return api.post('/users/login', params, { withCredentials: true })
 }
 export const logout = () => {
   return api.delete('/users/logout')
 }
 export const heartbeat = () => {
-  return api.get('/users/heartbeat')
+  return api.get('/users/heartbeat', { withCredentials: true })
 }
 export const getUser = ({ userId }) => {
   return api.get(`/users/profile/${userId}`)
