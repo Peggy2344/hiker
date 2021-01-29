@@ -38,7 +38,7 @@ const sessionSettings = {
   rolling: true,
   resave: true
 }
-if (process.env.DEV === false) {
+if (process.env.DEV === 'false') {
   sessionSettings.cookie.sameSite = 'none'
   sessionSettings.cookie.secure = true
 }
