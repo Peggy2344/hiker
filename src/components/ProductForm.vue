@@ -420,9 +420,9 @@ export default {
   color: inherit;
 }
 @media (min-width:1280px) {
-  .formContainer{
+  /* .formContainer{
     width: 50%;
-  }
+  } */
 }
 .width-80{
   width: 80%;

@@ -2,7 +2,7 @@
 <v-app app class="home">
   <Navbar />
   <!-- sectopn01 -->
-  <v-row v-if="!isLoading" class="transformY d-flex justify-space-around align-start flex ma-0 mx-lg-10">
+  <v-row v-if="!isLoading" class="mt-15 d-flex justify-space-around align-start flex ma-0 mx-lg-10">
     <v-col cols="12" class="h-10 mt-5">
       <v-breadcrumbs :items="links" large>
         <template v-slot:divider>
@@ -99,7 +99,7 @@
     </v-col>
   </v-row>
   <!-- review section -->
-  <v-container id="review" class="transformY d-flex justify-center align-center flex-column py-lg-15 px-lg-15 mx-auto my-15" v-if="!isLoading">
+  <v-container id="review" class="d-flex justify-center align-center flex-column py-lg-15 px-lg-15 mx-auto my-15" v-if="!isLoading">
       <v-col cols="12" class="d-flex flex-wrap">
         <div class="left"></div>
         <div class="d-flex col-12 col-md-6 justify-center align-center flex-wrap">
