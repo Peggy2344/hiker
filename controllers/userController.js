@@ -104,7 +104,7 @@ export const getUser = async (req, res) => {
 }
 export const heartbeat = async (req, res) => {
   let isLogin = false
-  console.log(res.session.user)
+  console.log(req.session.user)
   if (req.session.user !== undefined) {
     isLogin = true
   }

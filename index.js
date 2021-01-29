@@ -8,9 +8,7 @@ import routeUser from './routes/user.js'
 import routeAdmin from './routes/admin.js'
 import routeProduct from './routes/product.js'
 import routeOrder from './routes/order.js'
-import dotenv from 'dotenv'
 
-dotenv.config()
 mongoose.connect(process.env.DBURL, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
 
 const app = express()
