@@ -75,6 +75,9 @@ export const getFile = async (req, res) => {
     }
   } else {
     // heroku情況下
+    console.log(process.env.FTP_HOST)
+    console.log(process.env.FTP_USER)
+    console.log(req.params.file)
     axios({
       method: 'GET',
       url: 'http://' + process.env.FTP_HOST + '/' + process.env.FTP_USER + '/' + req.params.file
