@@ -40,8 +40,8 @@ const sessionSettings = {
   resave: true
 }
 if (process.env.DEV === 'false') {
-  sessionSettings.cookie.sameSite = 'lax'
-  sessionSettings.cookie.secure = true
+  sessionSettings.cookie.sameSite = 'Lax'
+  // sessionSettings.cookie.secure = true
 }
 app.use(session(sessionSettings))
 
