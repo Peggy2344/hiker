@@ -34,7 +34,7 @@ const sessionSettings = {
   cookie: {
     maxAge: 1000 * 60 * 30
   },
-  saveUninitialized: false,
+  // saveUninitialized: false,
   rolling: true,
   resave: true
 }
