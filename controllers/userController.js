@@ -57,7 +57,6 @@ export const login = async (req, res) => {
         username: result.username,
         role: result.role
       }
-      req.session.save()
       res.status(200).send({
         success: true,
         message: '',
