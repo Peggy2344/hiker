@@ -33,15 +33,14 @@ const sessionSettings = {
   secret: '549449',
   store: new MongoStore({ mongooseConnection: mongoose.connection }),
   cookie: {
-    maxAge: 1000 * 60 * 30,
-    domain: '.peggy2344.github.io'
+    maxAge: 1000 * 60 * 30
   },
   saveUninitialized: false,
   rolling: true,
   resave: true
 }
 if (process.env.DEV === 'false') {
-  sessionSettings.cookie.sameSite = 'none'
+  sessionSettings.cookie.sameSite = 'lax'
   sessionSettings.cookie.secure = true
 }
 app.use(session(sessionSettings))
