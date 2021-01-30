@@ -15,6 +15,7 @@ const app = express()
 app.use(bodyParser.json())
 app.use(cors({
   origin (origin, callback) {
+    console.log(origin)
     if (origin === undefined) {
       callback(null, true)
     } else {
