@@ -33,7 +33,8 @@ const sessionSettings = {
   secret: '549449',
   store: new MongoStore({ mongooseConnection: mongoose.connection }),
   cookie: {
-    maxAge: 1000 * 60 * 30
+    maxAge: 1000 * 60 * 30,
+    domain: process.env.VUE_APP_API
   },
   saveUninitialized: false,
   rolling: true,
