@@ -11,7 +11,7 @@ import swiper, { Navigation, Pagination, Autoplay } from 'swiper'
 import 'swiper/swiper-bundle.css'
 
 Vue.config.productionTip = false
-// axios.defaults.withCredentials = true
+axios.defaults.withCredentials = true
 Vue.use(VueAxios, axios)
 Vue.use(VueSweetalert2)
 Vue.use(VueAwesomeSwiper)

@@ -2,14 +2,14 @@
   <v-app app class="home">
     <Navbar />
     <v-row class="ma-5 mt-5 d-flex transformY flex align-center justify-space-between" v-if="!isLoading">
-      <v-col cols="8" class="col-lg-4 mr-auto" style="height: 80px">
+      <v-col cols="8" class="col-lg-4 mr-auto px-0">
         <v-breadcrumbs v-if="products.length" :items="items" large>
           <template v-slot:divider>
             <v-icon>mdi-chevron-right</v-icon>
           </template>
         </v-breadcrumbs>
       </v-col>
-      <v-col cols="4" class="col-lg-8 d-flex justify-end relative zindex" v-if="range.length">
+      <v-col cols="4" class="px-1 col-lg-8 d-flex justify-end relative zindex" v-if="range.length">
         <div class="brightGray--text cursor" @click="filter = !filter">
           篩選
           <v-icon>mdi-chevron-down</v-icon>

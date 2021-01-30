@@ -1,14 +1,14 @@
 <template>
-  <div class="d-flex flex-column justify-space-around" v-if="!isLoading">
-    <router-link :to="{name: 'ProductDetail', params: {productId: productId} }" class="h-65 d-flex justify-center align-center mt-lg-5 mb-5 pt-5">
+  <div class="d-flex flex-wrap flex-sm-nowrap flex-sm-column justify-space-around align-sm-center" v-if="!isLoading">
+    <router-link :to="{name: 'ProductDetail', params: {productId: productId} }" class="col-12 col-sm-10 h-65 d-flex justify-center align-center mt-sm-5 mb-sm-5 pa-0 pt-sm-5">
       <v-img
         contain
         class="img-height"
         :src="showImg"
       ></v-img>
     </router-link>
-    <v-row class="align-center justify-center d-flex flex h-35 ma-0">
-      <v-col cols="3" v-for="(img, index) in productImg" :key="img" class="col-sm-2 pa-1 ma-0 h-50">
+    <v-row class="col-12 col-sm-10 align-center justify-center d-flex flex pa-0 h-35 ma-0">
+      <v-col cols="3" v-for="(img, index) in productImg" :key="img" class="col-sm-2 col-lg-3 pa-1 ma-0 h-50">
         <v-img
           contain
           max-height="80px"
@@ -75,16 +75,16 @@ export default {
 .h-100{
   height: 100%;
 }
-.h-65{
+/* .h-65{
   height: 65%;
 }
 .h-35{
   height: 35%;
-}
+} */
 .img-height{
   height: 100%;
 }
-@media (min-width: 992px) {
+@media (min-width: 768px) {
   .h-35{
     height: 30%;
   }

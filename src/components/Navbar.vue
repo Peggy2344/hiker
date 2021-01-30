@@ -1,6 +1,6 @@
 <template>
   <div id="app" class="navbar">
-    <v-app-bar fixed :hide-on-scroll="hidebar" :color="navBackground" flat v-if="!isLoading">
+    <v-app-bar fixed :hide-on-scroll="hidebar" :color="navBackground" flat>
       <router-link to="/">
         <img class="mr-3" :src="logoSrc" height="40"/>
       </router-link>
@@ -147,19 +147,94 @@
   </div>
 </template>
 <script>
-import { getClassification } from '../apis/product'
+// import { getClassification } from '../apis/product'
 import { logout } from '../apis/user'
 export default {
   data () {
     return {
-      isLoading: true,
+      // isLoading: true,
       navBackground: 'transparent',
       hidebar: false,
       items: [
-        { text: '女款', category: [], navigationRoute: '', categoryRoute: [] },
-        { text: '男款', category: [], navigationRoute: '', categoryRoute: [] },
-        { text: '裝備', category: [], navigationRoute: '', categoryRoute: [] },
-        { text: '品牌', category: [], navigationRoute: '', categoryRoute: [] }
+        {
+          text: '女款',
+          category: [
+            '上衣',
+            '褲子',
+            '鞋子',
+            '外套',
+            '襪子'],
+          navigationRoute: 'women',
+          categoryRoute: [
+            'shirt',
+            'pant',
+            'shoes',
+            'jacket',
+            'socks'
+          ]
+        },
+        {
+          text: '男款',
+          category: [
+            '上衣',
+            '褲子',
+            '鞋子',
+            '外套',
+            '襪子'
+          ],
+          navigationRoute: 'men',
+          categoryRoute: [
+            'shirt',
+            'pant',
+            'shoes',
+            'jacket',
+            'socks'
+          ]
+        },
+        {
+          text: '裝備',
+          category: [
+            '登山杖',
+            '登山包',
+            '睡袋',
+            '鍋具',
+            '毛帽',
+            '隨行包'
+          ],
+          navigationRoute: 'equipment',
+          categoryRoute: [
+            'trekking-poles',
+            'backpacks',
+            'sleeping-bag',
+            'pots',
+            'hat',
+            'belt-bags'
+          ]
+        },
+        {
+          text: '品牌',
+          category: [
+            'mammut',
+            'gregory',
+            'MSR',
+            'mont-bell',
+            "ARC'TERYX",
+            'LOWA',
+            'Smartwool',
+            'Fjallraven'
+          ],
+          navigationRoute: 'brand',
+          categoryRoute: [
+            'mammut',
+            'gregory',
+            'MSR',
+            'mont-bell',
+            "ARC'TERYX",
+            'LOWA',
+            'Smartwool',
+            'Fjallraven'
+          ]
+        }
       ],
       showlogin: true,
       sidebar: false,
@@ -207,23 +282,23 @@ export default {
         console.log(error)
       }
     },
-    async fetchClassification () {
-      const res = await getClassification()
-      try {
-        const classificationData = res.data.result
-        for (let i = 0; i < this.items.length; i++) {
-          const navigation = classificationData.filter(item => {
-            return item.navigation === this.items[i].text
-          })[0]
-          this.items[i].category = navigation.category
-          this.items[i].navigationRoute = navigation.navigationRoute
-          this.items[i].categoryRoute = navigation.categoryRoute
-        }
-        this.isLoading = false
-      } catch (error) {
-        console.log(error)
-      }
-    },
+    // async fetchClassification () {
+    //   try {
+    //     const res = await getClassification()
+    //     const classificationData = res.data.result
+    //     for (let i = 0; i < this.items.length; i++) {
+    //       const navigation = classificationData.filter(item => {
+    //         return item.navigation === this.items[i].text
+    //       })[0]
+    //       this.items[i].category = navigation.category
+    //       this.items[i].navigationRoute = navigation.navigationRoute
+    //       this.items[i].categoryRoute = navigation.categoryRoute
+    //     }
+    //     this.isLoading = false
+    //   } catch (error) {
+    //     console.log(error)
+    //   }
+    // },
     handleScroll (event) {
       this.navBackground = window.scrollY > 100 ? 'white' : 'transparent'
       this.logoSrc = window.scrollY < 100 && this.$route.path === '/' ? require('../assets/logo-white.png') : require('../assets/logo.png')
@@ -238,7 +313,7 @@ export default {
     }
   },
   mounted () {
-    this.fetchClassification()
+    // this.fetchClassification()
     if (this.$store.state.user.id && this.$store.state.user.role === 'user') {
       this.$store.dispatch('fetchCartList')
     } else {

@@ -29,13 +29,13 @@
       </v-row>
     </template> -->
     <ProductImage class="h-70" v-if="product" :product="product"/>
-    <v-card-text class="pt-0 h-30 d-flex flex-column justify-center">
+    <v-card-text class="mt-3 pt-0 h-30 d-flex flex-column justify-center">
       <v-row
         align="center"
         class="mx-0 d-flex flex flex-column pa-0"
       >
       <!-- <v-card-title class="pa-0 font-weight-bold">{{product.brand}}</v-card-title> -->
-      <div class="overline mb-1 font-weight-bold">{{product.brand}}</div>
+      <div class="product_line_height mt-1 mt-lg-5 overline mb-1 font-weight-bold">{{product.brand}}</div>
       <template v-if="product.comments">
         <v-rating
           :value="4.5"
@@ -50,8 +50,8 @@
           4.5 (413)
         </div>
       </template>
-      <v-card-title class="pa-1 grow font-size">{{product.productName}}</v-card-title>
-      <div class="price-color">${{product.price}}</div>
+      <v-card-title class="product_line_height mt-1 mt-lg-5 pa-1 grow font-size">{{product.productName}}</v-card-title>
+      <div class="product_line_height mt-1 mt-lg-5 price-color">${{product.price}}</div>
       </v-row>
     </v-card-text>
   </v-card>
@@ -96,9 +96,9 @@ export default {
 .border:hover{
   border: 2px solid #BEF264;
 }
-.h-30{
+/* .h-30{
   height: 30%;
-}
+} */
 .h-70{
   height: 70%;
 }
@@ -114,12 +114,18 @@ export default {
 .flex{
   flex: 0 0 auto;
 }
-@media (min-width: 992px) {
+.product_line_height{
+  line-height: 1rem !important;
+}
+@media (min-width: 768px) {
   .img-height{
     height: 100%;
   }
   .font-size{
     font-size: 1rem;
+  }
+  .h-30{
+    height: 30%;
   }
 }
 </style>
