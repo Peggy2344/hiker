@@ -34,7 +34,7 @@ const sessionSettings = {
   store: new MongoStore({ mongooseConnection: mongoose.connection }),
   cookie: {
     maxAge: 1000 * 60 * 30,
-    domain: process.env.VUE_APP_API
+    domain: 'vue-hiker.herokuapp.com'
   },
   saveUninitialized: false,
   rolling: true,
