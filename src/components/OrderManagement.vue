@@ -8,7 +8,15 @@
       <hr class="my-0">
     </v-col>
     <v-col cols="12" class="d-flex flex-column justify-start align-start">
-      <OrderManage v-for="userData in userDatas" :userData="userData" :key="userData._id"/>
+      <div>
+        <v-select
+          v-model="selection"
+          :items="items"
+          label="排序依據"
+          validate-on-blur
+        ></v-select>
+      </div>
+      <OrderManage v-for="userData in orders" :userData="userData" :key="userData.orders[0]._id"/>
     </v-col>
   </v-row>
 </v-app>
@@ -23,7 +31,28 @@ export default {
   },
   data () {
     return {
-      userDatas: []
+      userDatas: [],
+      items: ['使用者', '訂單成立時間(由新至舊)'],
+      selection: '使用者'
+    }
+  },
+  computed: {
+    orders () {
+      let ary = []
+      if (this.selection === '使用者') {
+        ary = this.userDatas
+      } else {
+        this.userDatas.forEach(item => {
+          item.orders.forEach(order => {
+            ary.push({ _id: item._id, orders: [order] })
+          })
+        })
+        ary.sort((a, b) => {
+          console.log(b.orders[0].date)
+          return new Date(b.orders[0].date) - new Date(a.orders[0].date)
+        })
+      }
+      return ary
     }
   },
   methods: {

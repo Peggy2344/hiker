@@ -84,7 +84,7 @@ export default {
   },
   methods: {
     getTime (time) {
-      return dayjs(time).format('YYYY/MM/DD')
+      return dayjs(time).format('YYYY/MM/DD HH:mm')
     },
     changeStatus () {
       this.edit = true

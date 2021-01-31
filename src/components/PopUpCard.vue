@@ -1,9 +1,9 @@
 <template>
   <v-card
-      class="mx-auto d-flex align-center"
+      class="mx-auto d-flex align-center pa-0"
       max-width="600"
       width="100%"
-      outlined
+      v-if="product.productImg"
       >
       <v-col cols="4" class="col-lg-3">
       <v-img :src="env + '/products/file/' + product.productImg[0].file" >

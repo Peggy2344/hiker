@@ -114,7 +114,7 @@
         </router-link>
       </div>
       <v-card
-        class="mx-auto my-5"
+        class="mx-auto"
         width="380"
         flat
         color="transparent"

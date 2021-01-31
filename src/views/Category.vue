@@ -14,69 +14,19 @@
           篩選
           <v-icon>mdi-chevron-down</v-icon>
         </div>
-      <!-- <v-expansion-panels>
-        <v-expansion-panel :key="'price'">
-          <v-expansion-panel-header>
-            價格
-          </v-expansion-panel-header>
-          <v-expansion-panel-content>
-          <div class="d-flex justify-lg-space-between">
-            <v-col class="col-2 ma-0 pa-0">
-              <v-text-field
-                class="mt-0 pt-0"
-                hide-details
-                style="width: 60px"
-                :value="range[0]"
-                @change="$set(range, 0, $event)"
-              ></v-text-field>
-            </v-col>
-            <v-col class="col-3 pa-0">
-              <v-text-field
-                class="mt-0 pt-0"
-                hide-details
-                style="width: 60px"
-                :value="range[1]"
-                @change="$set(range, 1, $event)"
-              ></v-text-field>
-            </v-col>
-          </div>
-          <v-range-slider
-            v-model="range"
-            :max="max"
-            :min="min"
-            hide-details
-            step="1"
-            class="align-center"
-          >
-          </v-range-slider>
-          <v-btn class="mt-5" small color="primary" @click="applyPriceRange">
-            更新
-          </v-btn>
-          </v-expansion-panel-content>
-        </v-expansion-panel>
-        <v-expansion-panel :key="'brand'">
-        <v-expansion-panel-header>
-          品牌
-        </v-expansion-panel-header>
-        <v-expansion-panel-content>
-          <v-checkbox
-            v-for="brand in brands"
-            :label="brand.brand + ' (' + brand.count + ')'"
-            :key="brand.brand"
-            v-model="selectedBrand"
-            color="red"
-            :value="brand.brand"
-            hide-details
-          ></v-checkbox>
-        </v-expansion-panel-content>
-        </v-expansion-panel>
-      </v-expansion-panels> -->
+      </v-col>
+    </v-row>
+    <v-row v-if="isLoading" class="ma-5 mt-15 d-flex transformY flex mb-auto">
+      <v-col cols="6" class="col-lg-3 col-md-4"
+        v-for="index in 4"
+        :key="index">
+        <v-skeleton-loader
+          class="mx-auto"
+          type="card"
+        ></v-skeleton-loader>
       </v-col>
     </v-row>
     <v-row class="ma-5 mt-5 d-flex transformY flex mb-auto" v-if="!isLoading">
-      <!-- <v-col cols="6" class="col-lg-3 col-md-4 px-1 py-0 d-flex justify-center border-bottom height_for_card" v-for="product in products" :key="product._id">
-        <ProductCard :product="product" />
-      </v-col> -->
       <template v-if="productsData.length">
         <v-col cols="6" class="col-lg-3 col-md-4 px-1 py-0 mb-10 d-flex justify-center border-bottom height_for_card" v-for="product in products" :key="product._id">
           <ProductCard :product="product" class=" index_above" />
@@ -215,7 +165,9 @@ export default {
           this.products = []
           this.productsData = []
         }
-        this.isLoading = false
+        setTimeout(() => {
+          this.isLoading = false
+        }, 3000)
       } catch (error) {
         console.log(error)
       }

@@ -21,6 +21,7 @@
 
           <v-text-field
             v-model="password"
+            @keyup.enter="submitHandler"
             :rules="passwordRules"
             label="請輸入你的密碼"
             validate-on-blur
@@ -31,6 +32,7 @@
           ></v-text-field>
 
           <v-btn
+            :disabled="pending"
             color="primary"
             class="ma-auto"
             width="100%"
@@ -39,7 +41,12 @@
           >
             送出
           </v-btn>
-
+          <v-progress-circular
+            v-if="pending"
+            :width="5"
+            color="primary"
+            indeterminate
+          ></v-progress-circular>
         </v-form>
     </v-container>
   </v-app>
@@ -64,7 +71,8 @@ export default {
       v => !!v || '密碼為必填'
     ],
     prevRoute: '',
-    cart: []
+    cart: [],
+    pending: false
   }),
   computed: {
     ...mapState(['user', 'orderId', 'cartList'])
@@ -76,12 +84,14 @@ export default {
     },
     async submitHandler () {
       if (this.$refs.form.validate()) {
+        this.pending = true
         try {
           const res = await login({
             username: this.username,
             password: this.password
           })
           if (res.data.success) {
+            this.pending = false
             this.$store.commit('login', res.data.user)
             this.$store.dispatch('fetchCartList').then(() => {
               if (!this.cart) return

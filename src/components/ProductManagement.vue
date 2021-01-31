@@ -123,7 +123,6 @@ export default {
         { text: '種類', value: 'navigation' },
         { text: '類別', value: 'category' },
         { text: '價格', value: 'price' },
-        { text: '庫存', value: 'inStock' },
         { text: '商品圖片', value: 'productImg[0].file' },
         { text: 'Actions', value: 'actions', sortable: false }
       ],

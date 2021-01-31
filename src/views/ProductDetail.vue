@@ -2,7 +2,7 @@
 <v-app app class="home">
   <Navbar />
   <!-- sectopn01 -->
-  <v-row v-if="!isLoading" class="mt-15 d-flex justify-space-around align-start flex ma-0 mx-lg-10">
+  <v-row v-if="!isLoading" class="d-flex justify-space-around align-start flex ma-0 mx-lg-10 mt-15">
     <v-col cols="12" class="h-10 mt-5">
       <v-breadcrumbs :items="links" large>
         <template v-slot:divider>
@@ -85,12 +85,19 @@
           </div>
         </v-col>
         <v-col cols="10" class="col-lg-8 px-0 mx-3 mt-lg-10 text-center">
+          <v-progress-circular
+            v-if="pending"
+            :size="50"
+            color="primary"
+            indeterminate
+          ></v-progress-circular>
           <v-btn
             depressed
             color="primary"
             width="80%"
             height="50px"
             @click="submitHandler"
+            :disabled="pending"
           >
             加入購物車
           </v-btn>
@@ -175,14 +182,16 @@
       </transition>
   </v-container>
   <transition name="fade">
-    <div class="ordercard col-12 col-lg-4 col-xl-3" v-if="showOrder">
-      <v-btn class="close_btn" icon @click="showOrder = !showOrder">
-        <v-icon color="primary" small>
-          mdi-close
-        </v-icon>
-      </v-btn>
-      <PopUpCard :product="orderData"/>
-    </div>
+    <v-snackbar top :right="!$vuetify.breakpoint.mobile" light flat elevation="0" :timeout="timeout" width="100%" v-model="showOrder">
+      <div class="col-12 ordercard">
+        <v-btn class="close_btn" icon @click="showOrder = !showOrder">
+          <v-icon color="primary" small>
+            mdi-close
+          </v-icon>
+        </v-btn>
+        <PopUpCard v-if="orderData" :product="orderData"/>
+      </div>
+    </v-snackbar>
   </transition>
 </v-app>
 </template>
@@ -210,6 +219,7 @@ export default {
   },
   data () {
     return {
+      timeout: 100000,
       showOrder: false,
       orderData: {},
       tabs: '',
@@ -248,7 +258,8 @@ export default {
           disabled: true
         }
       ],
-      timer: ''
+      timer: '',
+      pending: false
     }
   },
   computed: {
@@ -349,12 +360,12 @@ export default {
       this.questions = question
       this.showQuestionForm = false
     },
-    timeout () {
-      this.timer = setTimeout(() => {
-        this.showOrder = false
-        clearTimeout(this.timer)
-      }, 3000)
-    },
+    // timeout () {
+    //   this.timer = setTimeout(() => {
+    //     this.showOrder = false
+    //     clearTimeout(this.timer)
+    //   }, 3000)
+    // },
     async submitHandler () {
       if (this.size.length) {
         if (!this.selectedSize) {
@@ -374,6 +385,7 @@ export default {
           return
         }
       }
+      this.pending = true
       let alreadyInCart = {}
       if (this.detailId) {
         alreadyInCart = this.cartList.find(item => item.productId === this.product._id && item.detailId === this.detailId)
@@ -386,8 +398,6 @@ export default {
         quantity: this.quantity
       }
       if (this.user.id && this.orderId && alreadyInCart) {
-        console.log(alreadyInCart.quantity)
-        console.log(this.quantity)
         const newOrder = {
           pId: alreadyInCart._id,
           quantity: alreadyInCart.quantity + this.quantity
@@ -404,8 +414,9 @@ export default {
       } else {
         this.orderData = Object.assign({ productName, brand, productImg, price }, { quantity: this.quantity })
       }
+      this.pending = false
       this.showOrder = true
-      this.timeout()
+      // this.timeout()
       this.$store.commit('ADD_CART', order)
       // alert('成功加入購物車')
     }
@@ -495,13 +506,13 @@ export default {
 }
 .ordercard{
   position: absolute;
-  top: 64px;
+  top: 0;
   right: 0;
 }
 .close_btn{
   position: absolute;
-  top: 15px;
-  right: 10px;
+  top: 20px;
+  right: 25px;
   z-index: 100;
 }
 .fade-enter-active, .fade-leave-active {

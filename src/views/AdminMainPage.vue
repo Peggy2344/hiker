@@ -18,27 +18,27 @@
             <router-link to="/">
               <img :src="require('../assets/logo.png')" height="45">
             </router-link>
+            </div>
+          <div class="mt-15">
+            <v-list-item
+              v-for="item in items"
+              :key="item.title"
+              class="text-center font-weight-bold ma-5"
+            >
+              <!-- <v-list-item-content class="h-100 text-center pa-0"> -->
+                <template v-if="item.type">
+                  <router-link class="adminSidebar_link d-flex align-center" :to="{name: item.category, params: {type: item.type}}">
+                    <v-list-item-title>{{ item.title }}</v-list-item-title>
+                  </router-link>
+                </template>
+                <template v-else>
+                  <router-link class="adminSidebar_link d-flex align-center" :to="{name: item.category}">
+                    <v-list-item-title>{{ item.title }}</v-list-item-title>
+                  </router-link>
+                </template>
+              <!-- </v-list-item-content> -->
+            </v-list-item>
           </div>
-        <v-list>
-          <v-list-item
-            v-for="item in items"
-            :key="item.title"
-            class="text-center font-weight-bold ma-5"
-          >
-            <!-- <v-list-item-content class="h-100 text-center pa-0"> -->
-              <template v-if="item.type">
-                <router-link class="adminSidebar_link d-flex align-center" :to="{name: item.category, params: {type: item.type}}">
-                  <v-list-item-title>{{ item.title }}</v-list-item-title>
-                </router-link>
-              </template>
-              <template v-else>
-                <router-link class="adminSidebar_link d-flex align-center" :to="{name: item.category}">
-                  <v-list-item-title>{{ item.title }}</v-list-item-title>
-                </router-link>
-              </template>
-            <!-- </v-list-item-content> -->
-          </v-list-item>
-        </v-list>
         <template v-slot:append>
           <div class="pa-2 mb-10">
             <v-btn block color="words">

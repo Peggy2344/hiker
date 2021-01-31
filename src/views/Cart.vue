@@ -2,22 +2,22 @@
 <v-app id="app">
   <v-container v-if="!isLoading" class="d-flex flex-column flex-wrap justify-center align-center">
     <Navbar />
-    <v-row class="d-flex flex-wrap align-center justify-center transformY col-lg-10 col-12 mt-5 flex-column">
+    <v-row class="mt-16 d-flex flex-wrap align-center justify-center col-lg-10 col-12 mt-5 flex-column">
       <h3 class="ma-0 text-h5 words--text">訂單</h3>
       <v-col cols="12">
         <hr class="hr">
       </v-col>
     </v-row>
       <v-row class="d-flex flex-wrap align-start justify-center col-lg-10 col-12 pa-0">
-        <v-col v-if="cartList.length" cols="12" class="col-lg-7 transformY">
+        <v-col v-if="cartList.length" cols="12" class="col-lg-7">
           <OrderCard v-for="(item, index) in cart" :key="index" :product="item" @delCart="delCart" />
         </v-col>
-        <v-col v-else cols="12" class="col-lg-7 d-flex justify-center transformY">
+        <v-col v-else cols="12" class="col-lg-7 d-flex justify-center">
           <div>
             <p>你的購物車是空的!</p>
           </div>
         </v-col>
-        <v-col cols="12" class="col-lg-4 transformY d-flex justify-end">
+        <v-col cols="12" class="col-lg-4 d-flex justify-end">
           <OrderDetail :cart="cart" />
         </v-col>
       </v-row>

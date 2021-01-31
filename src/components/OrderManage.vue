@@ -3,6 +3,7 @@
   class="d-flex align-center flex-wrap"
   width="100%"
   outlined
+  v-if="orders.length"
   >
     <v-col cols="12" class="col-md-2 d-flex flex-column align-center justify-center flex-wrap">
       <div class="overline">使用者ID</div>

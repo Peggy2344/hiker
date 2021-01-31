@@ -56,7 +56,9 @@
           class="ma-auto"
           width="100%"
           height="50px"
+          @keyup.enter="submitHandler"
           @click="submitHandler"
+          :disabled="pending"
         >
           送出
         </v-btn>
@@ -96,13 +98,15 @@ export default {
       passwordCheckRules: [
         v => !!v || '確認密碼為必填',
         (value) => value === this.password || '密碼不相同'
-      ]
+      ],
+      pending: false
     }
   },
 
   methods: {
     async submitHandler () {
       if (this.$refs.form.validate()) {
+        this.pending = true
         try {
           const res = await register({
             username: this.username,
@@ -110,6 +114,7 @@ export default {
             password: this.password
           })
           if (res.data.success) {
+            this.pending = false
             this.$swal({
               icon: 'success',
               text: '註冊成功'

@@ -61,7 +61,7 @@
       <NewItem />
     </div>
     <v-container class="d-flex flex-wrap justify-center homePage">
-      <v-row class="d-flex flex-wrap justify-center col-12 col-lg-6">
+      <v-row class="d-flex flex-column col-12 col-lg-6">
         <v-col cols="12" class="d-flex justify-center">
           <div
             class="col-12 d-flex flex-column flex-sm-row align-center justify-space-around bg-1 pa-10"
@@ -77,10 +77,18 @@
                 ><span class="highlight overline">SHOP NOW→</span></router-link
               >
             </div>
-            <v-img
-              max-width="300px"
-              :src="require('../assets/mainpage1.png')"
-            ></v-img>
+            <router-link
+            :to="{
+              name: 'Category',
+              params: { navigation: 'women', category: 'shirt' },
+            }"
+            class="link"
+            >
+              <v-img
+                max-width="300px"
+                :src="require('../assets/mainpage1.png')"
+              ></v-img>
+            </router-link>
           </div>
         </v-col>
         <v-col cols="12" class="d-flex justify-center">
@@ -98,10 +106,18 @@
                 ><span class="highlight overline">SHOP NOW→</span></router-link
               >
             </div>
-            <v-img
-              max-width="300px"
-              :src="require('../assets/mainpage2.png')"
-            ></v-img>
+            <router-link
+            :to="{
+              name: 'Category',
+              params: { navigation: 'men', category: 'shoes' },
+            }"
+            class="link"
+            >
+              <v-img
+                max-width="300px"
+                :src="require('../assets/mainpage2.png')"
+              ></v-img>
+            </router-link>
           </div>
         </v-col>
       </v-row>
@@ -121,10 +137,18 @@
                 ><span class="highlight overline">SHOP NOW→</span></router-link
               >
             </div>
-            <v-img
-              max-width="400px"
-              :src="require('../assets/mainpage3.png')"
-            ></v-img>
+            <router-link
+              :to="{
+                name: 'Category',
+                params: { navigation: 'equipment', category: 'backpacks' },
+              }"
+              class="link"
+              >
+              <v-img
+                max-width="400px"
+                :src="require('../assets/mainpage3.png')"
+              ></v-img>
+            </router-link>
           </div>
         </v-col>
         <v-col cols="12">
@@ -142,10 +166,18 @@
                 ><span class="highlight overline">SHOP NOW→</span></router-link
               >
             </div>
-            <v-img
-              max-width="200px"
-              :src="require('../assets/mainpage4.png')"
-            ></v-img>
+            <router-link
+            :to="{
+              name: 'Category',
+              params: { navigation: 'equipment', category: 'hat' },
+            }"
+            class="link"
+            >
+              <v-img
+                max-width="200px"
+                :src="require('../assets/mainpage4.png')"
+              ></v-img>
+            </router-link>
           </div>
         </v-col>
       </v-row>
