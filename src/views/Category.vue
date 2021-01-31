@@ -18,12 +18,12 @@
     </v-row>
     <v-row class="ma-5 mt-15 d-flex flex mb-auto">
       <template v-if="isLoading">
-        <v-col cols="6" class="col-lg-3 col-md-4 px-1 py-0 mb-10 d-flex justify-center border-bottom"
+        <v-col cols="6" class="col-lg-3 col-md-4 px-1 py-0 mb-10 d-flex justify-center border-bottom height_for_card"
           v-for="index in 8"
           :key="index">
           <v-skeleton-loader
             width="80%"
-            type="image, card-avatar, article"
+            type="card, article"
           ></v-skeleton-loader>
         </v-col>
       </template>
@@ -165,7 +165,9 @@ export default {
           this.products = []
           this.productsData = []
         }
-        this.isLoading = false
+        setTimeout(() => {
+          this.isLoading = false
+        }, 3000)
       } catch (error) {
         console.log(error)
       }

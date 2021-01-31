@@ -14,7 +14,7 @@
         </v-btn>
       </v-row>
       <v-row>
-        <v-col v-for="hotsale in hotsales" :key="hotsale._id" cols="6" class="d-flex flex-column align-center col-lg-2">
+        <v-col v-for="hotsale in hotsales" :key="hotsale._id" cols="6" class="d-flex flex-column align-center col-lg-3">
           <ProductCard :product="hotsale" />
           <v-btn small color="converse" @click="removeHandler(hotsale)">
             移除

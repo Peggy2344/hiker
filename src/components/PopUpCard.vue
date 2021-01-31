@@ -6,7 +6,7 @@
       v-if="product.productImg"
       >
         <v-col cols="4" class="col-lg-3">
-        <v-img :src="env + '/products/file/' + product.productImg[0].file" >
+        <v-img :lazy-src="require('../assets/222.jpeg')" :src="env + '/products/file/' + product.productImg[0].file" >
         </v-img>
         </v-col>
         <v-list-item three-line class="col-5">

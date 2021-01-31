@@ -27,7 +27,15 @@
         </div>
     </div>
     <v-col cols="12">
+      <v-container v-if="isLoading" class="progress">
+        <v-progress-circular
+          :size="50"
+          color="primary"
+          indeterminate
+        ></v-progress-circular>
+    </v-container>
       <v-data-table
+      v-if="!isLoading"
       :headers="headers"
       :items="products"
       class="elevation-1"
@@ -153,7 +161,8 @@ export default {
         status: 'create',
         productImg: []
       },
-      items: ['全部', '女款', '男款', '裝備']
+      items: ['全部', '女款', '男款', '裝備'],
+      isLoading: true
     }
   },
   methods: {
@@ -230,6 +239,7 @@ export default {
       const res = await getProducts()
       this.products = res.data.result
       this.productData = res.data.result
+      this.isLoading = false
     } catch (error) {
       console.log(error)
     }

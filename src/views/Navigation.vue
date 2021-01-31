@@ -3,7 +3,7 @@
     <Navbar />
     <div class="pa-0 ma-0 vw-100">
       <div class="vw-100 relative">
-        <img :src="require('../assets/mammut.jpg')" class="vw-100 contain">
+        <v-img :lazy-src="require('../assets/mammut.jpg')" :src="require('../assets/mammut.jpg')" class="vw-100 contain"></v-img>
         <div class="absolute category text-left">
           <p class="text-blue font-weight-bold ml-5">Category</p>
           <div class="box d-flex align-center justify-space-around">
@@ -129,8 +129,8 @@ export default {
   font-size: 0.8rem;
 }
 .category{
-  width: 50%;
-  top: 25%;
+  width: 70%;
+  top: 40%;
   left: 0;
   z-index: 10;
 }
