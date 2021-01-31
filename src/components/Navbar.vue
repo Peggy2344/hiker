@@ -25,13 +25,14 @@
       <template v-slot:activator="{ attrs, on }">
         <v-list-item-content
           class="list-item text-center justify-center hidden-md-and-down"
+          :class="{ list_black: black, list_white: !black }"
           v-bind="attrs"
           v-on="on"
         >
-          <a class="about" v-if="item.navigationRoute === 'brand'">
+          <a :class="{'about_black': black, 'about_white': !black}" v-if="item.navigationRoute === 'brand'">
               {{ item.text }}
           </a>
-          <router-link class="about" v-else :to="{ name: 'Navigation', params: { navigation: item.navigationRoute }}">
+          <router-link :class="{'about_black': black, 'about_white': !black}" v-else :to="{ name: 'Navigation', params: { navigation: item.navigationRoute }}">
               {{ item.text }}
           </router-link>
         </v-list-item-content>
@@ -54,7 +55,7 @@
       <v-menu offset-y max-width="100" transition="slide-y-transition">
         <template v-slot:activator="{ on, attrs }">
           <v-btn icon v-bind="attrs" v-on="on">
-            <v-icon color="primary">mdi-account</v-icon>
+            <v-icon :color="icon">mdi-account</v-icon>
           </v-btn>
         </template>
 
@@ -87,7 +88,7 @@
               bordered
               :content="cartList.length ? cartList.length : '0'"
             >
-            <v-icon color="primary">mdi-cart</v-icon>
+            <v-icon :color="icon">mdi-cart</v-icon>
           </v-badge>
         </v-btn>
       <!-- sidebar -->
@@ -238,7 +239,9 @@ export default {
       ],
       showlogin: true,
       sidebar: false,
-      logoSrc: require('../assets/logo-white.png')
+      logoSrc: require('../assets/logo-white.png'),
+      black: false,
+      icon: 'white'
     }
   },
   computed: {
@@ -300,9 +303,18 @@ export default {
     //   }
     // },
     handleScroll (event) {
-      this.navBackground = window.scrollY > 100 ? 'white' : 'transparent'
-      this.logoSrc = window.scrollY < 100 && this.$route.path === '/' ? require('../assets/logo-white.png') : require('../assets/logo.png')
-      this.hidebar = window.scrollY > 100
+      this.navBackground = window.scrollY > 200 ? 'white' : 'transparent'
+      // this.logoSrc = window.scrollY < 200 && this.$route.path === '/' ? require('../assets/logo-white.png') : require('../assets/logo.png')
+      if (window.scrollY < 200 && this.$route.path === '/') {
+        this.logoSrc = require('../assets/logo-white.png')
+        this.black = false
+        this.icon = 'white'
+      } else {
+        this.logoSrc = require('../assets/logo.png')
+        this.black = true
+        this.icon = 'black'
+      }
+      this.hidebar = window.scrollY > 200
     }
   },
   watch: {
@@ -331,7 +343,11 @@ export default {
 </script>
 
 <style scoped>
-.about{
+.about_white{
+  color: var(--v-white-base);
+  text-decoration: none;
+}
+.about_black{
   color: var(--v-primary-base);
   text-decoration: none;
 }
@@ -352,19 +368,34 @@ export default {
 .list-item{
   position: relative;
   flex: 0.5 0.5;
-  color: var(--v-primary-base);
 }
 .list-item:hover::before{
   content: '[';
-  color: var(--v-primary-base);
   position: absolute;
   left: 0;
 }
 .list-item:hover::after{
   content: ']';
-  color: var(--v-primary-base);
   position: absolute;
   right: 0;
+}
+.list_white {
+  color: var(--v-white-base);
+}
+.list_white:hover::before{
+  color: var(--v-white-base);
+}
+.list_white:hover::after{
+  color: var(--v-white-base);
+}
+.list_black {
+  color: var(--v-primary-base);
+}
+.list_black:hover::before{
+  color: var(--v-primary-base);
+}
+.list_black:hover::after{
+  color: var(--v-primary-base);
 }
 .v-menu__content{
   box-shadow: none;

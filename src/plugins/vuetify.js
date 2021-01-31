@@ -8,6 +8,7 @@ export default new Vuetify({
     options: { customProperties: true },
     themes: {
       light: {
+        white: '#fff',
         primary: '#333',
         secondary: '#fff',
         gray: '#f3f3f3',

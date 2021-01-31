@@ -56,11 +56,10 @@
           class="ma-auto"
           width="100%"
           height="50px"
-          @keyup.enter="submitHandler"
           @click="submitHandler"
           :disabled="pending"
         >
-          送出
+          {{ pending ? '註冊中' : '送出' }}
         </v-btn>
       </v-form>
     </v-container>

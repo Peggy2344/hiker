@@ -39,14 +39,14 @@
             height="50px"
             @click="submitHandler"
           >
-            送出
+            {{ pending ? '登入中' : '送出' }}
           </v-btn>
-          <v-progress-circular
+          <!-- <v-progress-circular
             v-if="pending"
             :width="5"
             color="primary"
             indeterminate
-          ></v-progress-circular>
+          ></v-progress-circular> -->
         </v-form>
     </v-container>
   </v-app>
@@ -91,7 +91,6 @@ export default {
             password: this.password
           })
           if (res.data.success) {
-            this.pending = false
             this.$store.commit('login', res.data.user)
             this.$store.dispatch('fetchCartList').then(() => {
               if (!this.cart) return
@@ -114,25 +113,23 @@ export default {
               }
               localStorage.removeItem('hiker-cart')
             })
-            this.$swal({
-              icon: 'success',
-              title: '登入成功'
-            }).then(() => {
-              if (this.prevRoute && this.prevRoute.params.productId) {
-                this.$router.go(-1)
-              } else if (res.data.user.role === 'admin') {
-                this.$router.push('/admin/product-management')
-              } else {
-                this.$router.push('/')
-              }
-            })
+            this.pending = false
+            if (this.prevRoute && this.prevRoute.params.productId) {
+              this.$router.go(-1)
+            } else if (res.data.user.role === 'admin') {
+              this.$router.push('/admin/product-management')
+            } else {
+              this.$router.push('/')
+            }
           } else {
+            this.pending = false
             this.$swal({
               icon: 'error',
               title: res.data.message
             })
           }
         } catch (err) {
+          this.pending = false
           console.log(err)
           this.$swal({
             icon: 'error',

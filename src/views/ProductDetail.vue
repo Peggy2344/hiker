@@ -2,108 +2,111 @@
 <v-app app class="home">
   <Navbar />
   <!-- sectopn01 -->
-  <v-row v-if="!isLoading" class="d-flex justify-space-around align-start flex ma-0 mx-lg-10 mt-15">
+  <v-row class="d-flex justify-space-around align-start flex ma-0 mx-lg-10 mt-15">
     <v-col cols="12" class="h-10 mt-5">
-      <v-breadcrumbs :items="links" large>
+      <v-breadcrumbs v-if="links.length" :items="links" large>
         <template v-slot:divider>
           <v-icon>mdi-chevron-right</v-icon>
         </template>
       </v-breadcrumbs>
     </v-col>
-    <v-col cols="8" class="col-md-4 col-sm-6 img_height d-flex justify-center ml-lg-5">
-      <template>
-        <ProductImage class="h-100 w-80" :product="product" />
-      </template>
-    </v-col>
-    <v-col cols="12" class="col-md-7 d-flex flex-column align-center">
-      <v-col cols="8" class="d-flex flex-column align-center align-lg-start">
-        <div><p class="text-subtitle">{{ product.brand }}</p></div>
-        <div><p class="text-h5 text-lg-h4 font-weight-bold">{{ product.productName }}</p></div>
-        <template v-if="comments.length">
-          <div class="d-flex justify-center align-center mb-5 flex-wrap">
-            <span class="text-h5 words--text py-5 mr-3">{{rating}}</span>
-              <v-rating
-                :value=rating
-                background-color="primary lighten-3"
-                color="primary"
-                size="25"
-                half-increments
-                readonly
-              ></v-rating>
-              <div>
-                <a href="#review" class="link words--text text-lg-subtitle-1 text-subtitle-2 pa-3"><span class="highlight">{{comments.length}}則評論</span></a>
-              </div>
-          </div>
+    <v-container v-if="isLoading" class="progress">
+      <v-progress-circular
+        :size="50"
+        color="primary"
+        indeterminate
+      ></v-progress-circular>
+    </v-container>
+    <template v-else>
+      <v-col cols="8" class="col-md-4 col-sm-6 img_height d-flex justify-center ml-lg-5">
+        <template>
+          <ProductImage class="h-100 w-80" :product="product" />
         </template>
-        <div><p class="text-subtitle font-weight-bold primary--text">${{ product.price }}</p></div>
       </v-col>
-      <v-col cols="12" class="d-flex flex-wrap pa-0 justify-center py-0">
-        <template v-if="details.length">
-          <v-col cols="4" class="col-lg-4 pa-0 mx-3">
-            <v-select
-              v-model="selectedColor"
-              :items="color"
-              label="請選擇顏色"
-              outlined
-            ></v-select>
-          </v-col>
-          <v-col cols="4" class="col-lg-4 pa-0 mx-3" v-if="size.length">
-            <v-select
-              v-model="selectedSize"
-              :items="size"
-              label="請選擇尺寸"
-              outlined
-            ></v-select>
-          </v-col>
-          <!-- <v-col cols="8" class="col-lg-4" v-if="selectedColor && selectedSize">
-            <label>庫存</label>
-              <p>{{ inStock }}</p>
-          </v-col> -->
-        </template>
-        <v-col cols="8" class="px-0 mx-3 d-flex justify-center">
-          <div class="col-10 col-lg-6">
-            <v-text-field
-              v-model.number="quantity"
-              hide-details
-              outlined
-              label="數量"
-              class="centered-input"
-            >
-              <v-icon
-                slot="prepend-inner"
-                @click="minusCount"
+      <v-col cols="12" class="col-md-7 d-flex flex-column align-center">
+        <v-col cols="8" class="d-flex flex-column align-center align-lg-start">
+          <div><p class="text-subtitle">{{ product.brand }}</p></div>
+          <div><p class="text-h5 text-lg-h4 font-weight-bold">{{ product.productName }}</p></div>
+          <template v-if="comments.length">
+            <div class="d-flex justify-center align-center mb-5 flex-wrap">
+              <span class="text-h5 words--text py-5 mr-3">{{rating}}</span>
+                <v-rating
+                  :value=rating
+                  background-color="primary lighten-3"
+                  color="primary"
+                  size="25"
+                  half-increments
+                  readonly
+                ></v-rating>
+                <div>
+                  <a href="#review" class="link words--text text-lg-subtitle-1 text-subtitle-2 pa-3"><span class="highlight">{{comments.length}}則評論</span></a>
+                </div>
+            </div>
+          </template>
+          <div><p class="text-subtitle font-weight-bold primary--text">${{ product.price }}</p></div>
+        </v-col>
+        <v-col cols="12" class="d-flex flex-wrap pa-0 justify-center py-0">
+          <template v-if="details.length">
+            <v-col cols="4" class="col-lg-4 pa-0 mx-3">
+              <v-select
+                v-model="selectedColor"
+                :items="color"
+                label="請選擇顏色"
+                outlined
+              ></v-select>
+            </v-col>
+            <v-col cols="4" class="col-lg-4 pa-0 mx-3" v-if="size.length">
+              <v-select
+                v-model="selectedSize"
+                :items="size"
+                label="請選擇尺寸"
+                outlined
+              ></v-select>
+            </v-col>
+            <!-- <v-col cols="8" class="col-lg-4" v-if="selectedColor && selectedSize">
+              <label>庫存</label>
+                <p>{{ inStock }}</p>
+            </v-col> -->
+          </template>
+          <v-col cols="8" class="px-0 mx-3 d-flex justify-center">
+            <div class="col-10 col-lg-6">
+              <v-text-field
+                v-model.number="quantity"
+                hide-details
+                outlined
+                label="數量"
+                class="centered-input"
               >
-                mdi-minus
-                </v-icon>
                 <v-icon
-                  slot="append"
-                  @click="quantity++"
+                  slot="prepend-inner"
+                  @click="minusCount"
                 >
-                  mdi-plus
-                </v-icon>
-            </v-text-field>
-          </div>
-        </v-col>
-        <v-col cols="10" class="col-lg-8 px-0 mx-3 mt-lg-10 text-center">
-          <v-progress-circular
-            v-if="pending"
-            :size="50"
-            color="primary"
-            indeterminate
-          ></v-progress-circular>
-          <v-btn
-            depressed
-            color="primary"
-            width="80%"
-            height="50px"
-            @click="submitHandler"
-            :disabled="pending"
-          >
-            加入購物車
-          </v-btn>
+                  mdi-minus
+                  </v-icon>
+                  <v-icon
+                    slot="append"
+                    @click="quantity++"
+                  >
+                    mdi-plus
+                  </v-icon>
+              </v-text-field>
+            </div>
+          </v-col>
+          <v-col cols="10" class="col-lg-8 px-0 mx-3 mt-lg-10 text-center">
+            <v-btn
+              depressed
+              color="primary"
+              width="80%"
+              height="50px"
+              @click="submitHandler"
+              :disabled="pending"
+            >
+              {{ pending ? '加入中' : '加入購物車'}}
+            </v-btn>
+          </v-col>
         </v-col>
       </v-col>
-    </v-col>
+    </template>
   </v-row>
   <!-- review section -->
   <v-container id="review" class="d-flex justify-center align-center flex-column py-lg-15 px-lg-15 mx-auto my-15" v-if="!isLoading">
@@ -182,8 +185,8 @@
       </transition>
   </v-container>
   <transition name="fade">
-    <v-snackbar top :right="!$vuetify.breakpoint.mobile" light flat elevation="0" :timeout="timeout" width="100%" v-model="showOrder">
-      <div class="col-12 ordercard">
+    <v-snackbar top :right="!$vuetify.breakpoint.mobile" light flat color="transparent" elevation="0" :timeout="timeout" v-model="showOrder" class="col-12 col-lg-4">
+      <div class="col-12 col-lg-8 ordercard">
         <v-btn class="close_btn" icon @click="showOrder = !showOrder">
           <v-icon color="primary" small>
             mdi-close
@@ -219,7 +222,7 @@ export default {
   },
   data () {
     return {
-      timeout: 100000,
+      timeout: 3000,
       showOrder: false,
       orderData: {},
       tabs: '',
@@ -360,12 +363,6 @@ export default {
       this.questions = question
       this.showQuestionForm = false
     },
-    // timeout () {
-    //   this.timer = setTimeout(() => {
-    //     this.showOrder = false
-    //     clearTimeout(this.timer)
-    //   }, 3000)
-    // },
     async submitHandler () {
       if (this.size.length) {
         if (!this.selectedSize) {
@@ -397,28 +394,30 @@ export default {
         detailId: this.detailId,
         quantity: this.quantity
       }
-      if (this.user.id && this.orderId && alreadyInCart) {
-        const newOrder = {
-          pId: alreadyInCart._id,
-          quantity: alreadyInCart.quantity + this.quantity
+      try {
+        if (this.user.id && this.orderId && alreadyInCart) {
+          const newOrder = {
+            pId: alreadyInCart._id,
+            quantity: alreadyInCart.quantity + this.quantity
+          }
+          await editOrder({ userId: this.user.id, orderId: this.orderId }, newOrder)
+        } else if (this.user.id && this.orderId) {
+          await pushOrder({ userId: this.user.id, orderId: this.orderId }, order)
+        } else if (this.user.id) {
+          await postOrder({ userId: this.user.id }, order)
         }
-        await editOrder({ userId: this.user.id, orderId: this.orderId }, newOrder)
-      } else if (this.user.id && this.orderId) {
-        await pushOrder({ userId: this.user.id, orderId: this.orderId }, order)
-      } else if (this.user.id) {
-        await postOrder({ userId: this.user.id }, order)
+        const { productName, brand, productImg, price } = this.product
+        if (this.detailId) {
+          this.orderData = Object.assign({ productName, brand, productImg, price }, { quantity: this.quantity, detail: { color: this.selectedColor, size: this.selectedSize } })
+        } else {
+          this.orderData = Object.assign({ productName, brand, productImg, price }, { quantity: this.quantity })
+        }
+        this.pending = false
+        this.showOrder = true
+        this.$store.commit('ADD_CART', order)
+      } catch (error) {
+        alert('加入失敗，請稍後再試')
       }
-      const { productName, brand, productImg, price } = this.product
-      if (this.detailId) {
-        this.orderData = Object.assign({ productName, brand, productImg, price }, { quantity: this.quantity, detail: { color: this.selectedColor, size: this.selectedSize } })
-      } else {
-        this.orderData = Object.assign({ productName, brand, productImg, price }, { quantity: this.quantity })
-      }
-      this.pending = false
-      this.showOrder = true
-      // this.timeout()
-      this.$store.commit('ADD_CART', order)
-      // alert('成功加入購物車')
     }
   },
   watch: {
@@ -458,6 +457,16 @@ export default {
 }
 .absolute {
   position: absolute;
+}
+.progress {
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+  top: 50%;
+  transform: translateY(-50%);
 }
 .h-10{
   height: 10%;
@@ -527,6 +536,9 @@ export default {
   }
   .h-lg-50{
     height: 50%;
+  }
+  .ordercard{
+    position: relative;
   }
 }
 </style>

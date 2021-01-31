@@ -1,6 +1,6 @@
 <template>
 <v-app id="app">
-  <v-container v-if="!isLoading" class="d-flex flex-column flex-wrap justify-center align-center">
+  <v-container class="d-flex flex-column flex-wrap justify-center align-center">
     <Navbar />
     <v-row class="mt-16 d-flex flex-wrap align-center justify-center col-lg-10 col-12 mt-5 flex-column">
       <h3 class="ma-0 text-h5 words--text">訂單</h3>
@@ -9,7 +9,18 @@
       </v-col>
     </v-row>
       <v-row class="d-flex flex-wrap align-start justify-center col-lg-10 col-12 pa-0">
-        <v-col v-if="cartList.length" cols="12" class="col-lg-7">
+        <template v-if="isLoading">
+          <v-col cols="12" class="col-lg-7">
+            <v-skeleton-loader
+              width="80%"
+              type="list-item-avatar-three-line"
+              boilerplate
+              v-for="index in 8"
+              :key="index"
+            ></v-skeleton-loader>
+          </v-col>
+        </template>
+        <v-col v-else-if="cartList.length" cols="12" class="col-lg-7">
           <OrderCard v-for="(item, index) in cart" :key="index" :product="item" @delCart="delCart" />
         </v-col>
         <v-col v-else cols="12" class="col-lg-7 d-flex justify-center">

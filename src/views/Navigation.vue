@@ -19,9 +19,21 @@
             </template>
           </v-breadcrumbs>
         </v-col>
-        <v-col cols="6" class="col-lg-3 col-md-4 px-1 py-0 mb-10 d-flex justify-center border-bottom height_for_card" v-for="product in products" :key="product._id">
-          <ProductCard :product="product" />
-        </v-col>
+          <template v-if="isLoading">
+            <v-col cols="6" class="col-lg-3 col-md-4 px-1 py-0 mb-10 d-flex justify-center border-bottom"
+                v-for="index in 8"
+                :key="index">
+              <v-skeleton-loader
+                width="100%"
+                type="image, avatar ,article"
+              ></v-skeleton-loader>
+            </v-col>
+          </template>
+          <template v-else>
+            <v-col cols="6" class="col-lg-3 col-md-4 px-1 py-0 mb-10 d-flex justify-center border-bottom height_for_card" v-for="product in products" :key="product._id">
+              <ProductCard :product="product" />
+            </v-col>
+          </template>
       </v-row>
     </div>
     <Footer />
@@ -41,6 +53,7 @@ export default {
   },
   data () {
     return {
+      isLoading: true,
       products: [],
       items: [
         {
@@ -82,6 +95,7 @@ export default {
           this.items[1].text = this.products[0].navigation
           this.items[1].to = { name: 'Navigation', params: { navigation } }
         }
+        this.isLoading = false
       } catch (error) {
         console.log(error)
       }
