@@ -64,7 +64,7 @@
             <v-list-item-title>後台管理</v-list-item-title>
           </v-list-item>
           <v-list-item v-else :to="{ name: 'Purchase', params: { status: 'process' }}">
-            <v-list-item-title>會員管理</v-list-item-title>
+            <v-list-item-title>會員資訊</v-list-item-title>
           </v-list-item>
           <v-list-item link>
             <v-list-item-title @click="logout">登出</v-list-item-title>

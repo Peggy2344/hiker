@@ -339,7 +339,7 @@ export default {
     commentHandler () {
       if (!this.user.id) {
         this.$swal.fire({
-          title: '請先登入再留言!',
+          text: '請先登入再留言!',
           icon: 'warning',
           showCancelButton: true,
           confirmButtonColor: '#3085d6',
@@ -368,7 +368,7 @@ export default {
         if (!this.selectedSize) {
           this.$swal({
             icon: 'error',
-            title: '請選擇商品尺寸'
+            text: '請選擇商品尺寸'
           })
           return
         }
@@ -377,7 +377,7 @@ export default {
         if (!this.selectedColor) {
           this.$swal({
             icon: 'error',
-            title: '請選擇商品顏色'
+            text: '請選擇商品顏色'
           })
           return
         }
