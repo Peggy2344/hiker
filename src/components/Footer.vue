@@ -2,7 +2,7 @@
   <v-footer
     padless
     color="primary lighten-1"
-    class="transformY"
+    class="mt-15"
   >
     <v-card
       flat

@@ -1,6 +1,6 @@
 <template>
   <div id="app" class="navbar">
-    <v-app-bar fixed :hide-on-scroll="hidebar" :color="navBackground" flat>
+    <v-app-bar fixed :hide-on-scroll="hidebar" :value="!hidebar"  :color="navBackground" flat>
       <router-link to="/">
         <img class="mr-3" :src="logoSrc" height="40"/>
       </router-link>
@@ -285,23 +285,6 @@ export default {
         console.log(error)
       }
     },
-    // async fetchClassification () {
-    //   try {
-    //     const res = await getClassification()
-    //     const classificationData = res.data.result
-    //     for (let i = 0; i < this.items.length; i++) {
-    //       const navigation = classificationData.filter(item => {
-    //         return item.navigation === this.items[i].text
-    //       })[0]
-    //       this.items[i].category = navigation.category
-    //       this.items[i].navigationRoute = navigation.navigationRoute
-    //       this.items[i].categoryRoute = navigation.categoryRoute
-    //     }
-    //     this.isLoading = false
-    //   } catch (error) {
-    //     console.log(error)
-    //   }
-    // },
     handleScroll (event) {
       this.navBackground = window.scrollY > 200 ? 'white' : 'transparent'
       // this.logoSrc = window.scrollY < 200 && this.$route.path === '/' ? require('../assets/logo-white.png') : require('../assets/logo.png')
