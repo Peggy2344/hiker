@@ -4,7 +4,7 @@
   <!-- sectopn01 -->
   <v-row class="d-flex justify-space-around align-start flex ma-0 mx-lg-10 mt-15">
     <v-col cols="12" class="h-10 mt-5">
-      <v-breadcrumbs v-if="product.length" :items="links" large>
+      <v-breadcrumbs v-if="links[3].text" :items="links" large>
         <template v-slot:divider>
           <v-icon>mdi-chevron-right</v-icon>
         </template>
@@ -257,7 +257,7 @@ export default {
           exact: true
         },
         {
-          text: 'product',
+          text: '',
           disabled: true
         }
       ],
