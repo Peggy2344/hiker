@@ -26,6 +26,7 @@
                 :key="index">
               <v-skeleton-loader
                 width="100%"
+                class="mb-3"
                 type="image, avatar ,article"
               ></v-skeleton-loader>
             </v-col>
