@@ -24,6 +24,7 @@
           </v-col>
         </v-row>
       </v-container>
+      <v-spacer></v-spacer>
     <Footer class="mt-15" />
   </v-app>
 </template>

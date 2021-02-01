@@ -42,7 +42,7 @@
 
         <v-text-field
           v-model="passwordCheck"
-          @keyup="submitHandler"
+          @keyup.enter="submitHandler"
           :rules="passwordCheckRules"
           label="請再次確認密碼"
           validate-on-blur
@@ -105,8 +105,10 @@ export default {
 
   methods: {
     async submitHandler () {
-      if (this.$refs.form.validate()) {
-        this.pending = true
+      this.pending = true
+      if (!this.$refs.form.validate()) {
+        this.pending = false
+      } else {
         try {
           const res = await register({
             username: this.username,

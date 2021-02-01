@@ -1,12 +1,12 @@
 <template>
   <v-container>
-    <v-container v-if="isLoading" class="progress">
-        <v-progress-circular
-          :size="50"
-          color="primary"
-          indeterminate
-        ></v-progress-circular>
-      </v-container>
+    <v-container v-if="isLoading" class="d-flex justify-center">
+      <v-progress-circular
+        :size="50"
+        color="primary"
+        indeterminate
+      ></v-progress-circular>
+    </v-container>
     <div v-else-if="!orders.length" class="d-flex justify-center">
       <p>目前沒有訂單</p>
     </div>
@@ -70,7 +70,9 @@ export default {
       } else {
         this.orders = result.data.orderList
       }
-      this.isLoading = false
+      setTimeout(() => {
+        this.isLoading = false
+      }, 3000)
     }
   },
   mounted () {
