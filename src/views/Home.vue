@@ -64,7 +64,7 @@
       <v-row class="d-flex flex-column col-12 col-lg-6">
         <v-col cols="12" class="d-flex justify-center">
           <div
-            class="col-12 d-flex flex-column flex-sm-row align-center justify-space-around bg-1 pa-10"
+            class="col-10 d-flex flex-column flex-sm-row align-center justify-space-around bg-1 pa-10"
           >
             <div class="mb-10">
               <p class="mb-1 text-h5">上衣</p>

@@ -314,7 +314,11 @@ export default {
         this.black = true
         this.icon = 'black'
       }
-      this.hidebar = window.scrollY > 200
+      if (window.scrollY < 200) {
+        this.hidebar = false
+      } else {
+        this.hidebar = true
+      }
     }
   },
   watch: {
