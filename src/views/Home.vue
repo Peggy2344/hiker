@@ -61,7 +61,7 @@
       <NewItem />
     </div>
     <v-container class="d-flex flex-wrap justify-center homePage">
-      <v-row class="d-flex flex-column col-12 col-lg-6">
+      <v-row class="col-12 col-lg-6 d-flex flex-wrap justify-center">
         <v-col cols="12" class="d-flex justify-center">
           <div
             class="col-12 d-flex flex-column flex-sm-row align-center justify-space-around bg-1 pa-10"
@@ -298,7 +298,7 @@ export default {
   background: #fff;
 }
 .vh-100 {
-  height: 60vh;
+  height: 70vh;
 }
 .relative {
   position: relative;

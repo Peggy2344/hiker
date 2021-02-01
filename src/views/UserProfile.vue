@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <Navbar />
-      <v-container v-if="!isLoading" class="d-flex flex-column flex-wrap justify-center align-center my-lg-10">
+      <v-container v-if="!isLoading" class="d-flex flex-column flex-wrap justify-center align-center my-lg-10 mb-15">
         <v-row class="d-flex flex-wrap align-center justify-center transformY col-lg-10 col-12 mt-5 flex-column">
           <v-col cols="12" class="col-lg-10 col-xl-8 d-flex justify-center pa-0">
             <!-- <v-btn v-if="$vuetify.breakpoint.mobile" icon v-bind="attrs" v-on="on"> -->
@@ -24,7 +24,7 @@
           </v-col>
         </v-row>
       </v-container>
-    <Footer class="mt-auto" />
+    <Footer class="mt-15" />
   </v-app>
 </template>
 

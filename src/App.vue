@@ -72,4 +72,14 @@ body {
 html {
   scroll-behavior: smooth;
 }
+.progress {
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+  top: 50%;
+  transform: translateY(-50%);
+}
 </style>

@@ -4,7 +4,7 @@
   <!-- sectopn01 -->
   <v-row class="d-flex justify-space-around align-start flex ma-0 mx-lg-10 mt-15">
     <v-col cols="12" class="h-10 mt-5">
-      <v-breadcrumbs v-if="links.length" :items="links" large>
+      <v-breadcrumbs v-if="links[3].text" :items="links" large>
         <template v-slot:divider>
           <v-icon>mdi-chevron-right</v-icon>
         </template>
@@ -257,7 +257,7 @@ export default {
           exact: true
         },
         {
-          text: 'product',
+          text: '',
           disabled: true
         }
       ],
@@ -339,7 +339,7 @@ export default {
     commentHandler () {
       if (!this.user.id) {
         this.$swal.fire({
-          title: '請先登入再留言!',
+          text: '請先登入再留言!',
           icon: 'warning',
           showCancelButton: true,
           confirmButtonColor: '#3085d6',
@@ -368,7 +368,7 @@ export default {
         if (!this.selectedSize) {
           this.$swal({
             icon: 'error',
-            title: '請選擇商品尺寸'
+            text: '請選擇商品尺寸'
           })
           return
         }
@@ -377,7 +377,7 @@ export default {
         if (!this.selectedColor) {
           this.$swal({
             icon: 'error',
-            title: '請選擇商品顏色'
+            text: '請選擇商品顏色'
           })
           return
         }

@@ -16,7 +16,16 @@
           validate-on-blur
         ></v-select>
       </div>
-      <OrderManage v-for="userData in orders" :userData="userData" :key="userData.orders[0]._id"/>
+        <v-container v-if="isLoading" class="progress">
+          <v-progress-circular
+            :size="50"
+            color="primary"
+            indeterminate
+          ></v-progress-circular>
+        </v-container>
+      <template v-else>
+        <OrderManage v-for="userData in orders" :userData="userData" :key="userData.orders[0]._id"/>
+      </template>
     </v-col>
   </v-row>
 </v-app>
@@ -33,7 +42,8 @@ export default {
     return {
       userDatas: [],
       items: ['使用者', '訂單成立時間(由新至舊)'],
-      selection: '使用者'
+      selection: '使用者',
+      isLoading: true
     }
   },
   computed: {
@@ -59,6 +69,7 @@ export default {
     async fetchData () {
       const result = await getUserOrder()
       this.userDatas = result.data.userOrder
+      this.isLoading = false
     }
   },
   mounted () {

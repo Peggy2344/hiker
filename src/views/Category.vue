@@ -102,7 +102,6 @@
     <Footer class="mt-15" v-if="!isLoading" />
   </v-app>
 </template>
-
 <script>
 import Navbar from '@/components/Navbar.vue'
 import Footer from '@/components/Footer.vue'

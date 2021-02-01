@@ -13,7 +13,14 @@
           + 新增
         </v-btn>
       </v-row>
-      <v-row>
+      <v-container v-if="isLoading" class="progress">
+        <v-progress-circular
+          :size="50"
+          color="primary"
+          indeterminate
+        ></v-progress-circular>
+      </v-container>
+      <v-row v-else>
         <v-col v-for="hotsale in hotsales" :key="hotsale._id" cols="6" class="d-flex flex-column align-center col-lg-3">
           <ProductCard :product="hotsale" />
           <v-btn small color="converse" @click="removeHandler(hotsale)">
@@ -47,6 +54,7 @@ export default {
   },
   data () {
     return {
+      isLoading: true,
       hotsales: [],
       hotsaleForm: false
     }
@@ -55,6 +63,7 @@ export default {
     async fetchData () {
       const result = await getHotsale()
       this.hotsales = result.data.result
+      this.isLoading = false
     },
     afterSumbitHandler (data) {
       this.hotsales.push(data)

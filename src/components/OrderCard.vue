@@ -5,8 +5,10 @@
     outlined
   >
     <v-col cols="4" class="col-lg-3">
-      <v-img :src="env + '/products/file/' + product.productImg[0].file" >
-      </v-img>
+      <router-link :to="{name: 'ProductDetail', params: {productId: product._id} }">
+        <v-img :src="env + '/products/file/' + product.productImg[0].file" >
+        </v-img>
+      </router-link>
     </v-col>
     <v-list-item three-line class="col-7 col-lg-5">
       <v-list-item-content>

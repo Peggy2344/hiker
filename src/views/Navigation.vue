@@ -3,7 +3,8 @@
     <Navbar />
     <div class="pa-0 ma-0 vw-100">
       <div class="vw-100 relative">
-        <v-img :lazy-src="require('../assets/mammut.jpg')" :src="require('../assets/mammut.jpg')" class="vw-100 contain"></v-img>
+        <div class="vw-100 relative mb-15 mb-sm-5">
+        <img :src="require('../assets/mammut.jpg')" class="vw-100 contain">
         <div class="absolute category text-left">
           <p class="text-blue font-weight-bold ml-5">Category</p>
           <div class="box d-flex align-center justify-space-around">
@@ -25,6 +26,7 @@
                 :key="index">
               <v-skeleton-loader
                 width="100%"
+                class="mb-3"
                 type="image, avatar ,article"
               ></v-skeleton-loader>
             </v-col>
@@ -130,7 +132,7 @@ export default {
 }
 .category{
   width: 70%;
-  top: 40%;
+  top: 50%;
   left: 0;
   z-index: 10;
 }
