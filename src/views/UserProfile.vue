@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <Navbar />
-      <v-container v-if="!isLoading" class="d-flex flex-column flex-wrap justify-center align-center my-lg-10 mb-15">
+      <v-container v-if="!isLoading" class="vh-80 d-flex flex-column flex-wrap justify-center align-center my-lg-10 mb-15">
         <v-row class="d-flex flex-wrap align-center justify-center transformY col-lg-10 col-12 mt-5 flex-column">
           <v-col cols="12" class="col-lg-10 col-xl-8 d-flex justify-center pa-0">
             <!-- <v-btn v-if="$vuetify.breakpoint.mobile" icon v-bind="attrs" v-on="on"> -->
@@ -18,7 +18,7 @@
             <hr class="hr">
           </v-col>
         </v-row>
-        <v-row class="vh-100 d-flex flex-wrap align-center justify-center col-lg-10 col-12 pa-0">
+        <v-row class="d-flex flex-wrap justify-center col-lg-10 col-12 pa-0">
           <v-col cols="12" class="col-lg-10 col-xl-8 transformY">
             <router-view></router-view>
           </v-col>
@@ -66,8 +66,8 @@ export default {
 </script>
 
 <style>
-.vh-100 {
-  height: 100vh;
+.vh-80 {
+  height: 80vh;
 }
 .transformY{
   transform: translateY(60px);

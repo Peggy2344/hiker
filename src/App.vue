@@ -24,11 +24,11 @@ export default {
         .then(res => {
           if (this.user.id.length > 0) {
             if (!res.data) {
-              this.$swal({
-                icon: 'error',
-                title: '錯誤',
-                text: '登入時效已過'
-              })
+              // this.$swal({
+              //   icon: 'error',
+              //   title: '錯誤',
+              //   text: '登入時效已過'
+              // })
 
               this.$store.commit('logout')
 

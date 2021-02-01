@@ -3,7 +3,7 @@
     <v-card
       class="mx-auto d-flex justify-center align-center"
       outlined
-      width="80%"
+      width="100%"
     >
       <v-row class="col-12 col-lg-6">
         <v-col cols="12" class="d-flex justify-center mb-10">

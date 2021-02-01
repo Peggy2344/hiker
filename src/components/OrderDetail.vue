@@ -32,7 +32,7 @@
 
             <v-card-actions>
               <v-btn
-                class="ma-2 pa-5 ml-auto gocheckout"
+                class="ma-2 ml-auto gocheckout"
                 outlined
                 width="100%"
                 large

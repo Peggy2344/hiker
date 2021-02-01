@@ -58,11 +58,12 @@
             </v-icon>
           </v-btn>
           <v-btn
-          class="mx-1"
-          fab
-          icon
-          x-small
-          @click="delCart()"
+            class="mx-1"
+            fab
+            icon
+            x-small
+            :disabled="isLoading"
+            @click="delCart()"
         >
           <v-icon dark color="confirm">
             mdi-close
@@ -81,7 +82,8 @@ export default {
   props: ['product'],
   data () {
     return {
-      env: process.env.VUE_APP_API
+      env: process.env.VUE_APP_API,
+      isLoading: false
     }
   },
   computed: {
@@ -101,6 +103,7 @@ export default {
       }
     },
     async delCart () {
+      this.isLoading = true
       let item = {}
       if (this.product.detailId) {
         item = this.cartList.find(el => el.detailId === this.product.detailId)
@@ -118,6 +121,7 @@ export default {
       } else {
         this.$store.commit('DEL_CART', { productId: item.productId })
       }
+      this.isLoading = false
       // } else {
       //   this.$emit('delCart', item)
       //   // this.cart.splice(index, 1)
