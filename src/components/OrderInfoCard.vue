@@ -1,34 +1,43 @@
 <template>
-  <v-container v-if="!isLoading">
-    <div v-if="!orders.length" class="d-flex justify-center">
+  <v-container>
+    <v-container v-if="isLoading" class="progress">
+        <v-progress-circular
+          :size="50"
+          color="primary"
+          indeterminate
+        ></v-progress-circular>
+      </v-container>
+    <div v-else-if="!orders.length" class="d-flex justify-center">
       <p>目前沒有訂單</p>
     </div>
     <!-- <transition-group name="slide"> -->
-    <v-card
-      class="mx-auto d-flex align-center"
-      outlined
-      v-for="order in orders"
-      :key="order._id"
-    >
-      <v-col cols="12" class="d-flex align-center justify-space-between flex-wrap">
-        <!-- <v-list-item-content > -->
-          <v-col cols="12" class="py-0">
-            <div class="overline">{{getTime(order.date)}}</div>
-          </v-col>
-          <v-col cols="12" class="col-sm-6 d-flex justify-space-around">
-            <router-link :to="{ name: 'OrderDetail', params: { status , orderId: order._id }}">
-              <div class="overline mb-1"> {{order._id.slice(-8)}}</div>
-            </router-link>
-            <div class="overline mb-1"> {{order.products.length}}件商品</div>
-            <div class="overline mb-1"> ${{order.payment.totalPrice}}</div>
-          </v-col>
-          <v-col cols="12" class="py-0 col-sm-6 d-flex justify-end justify-sm-space-around">
-            <div class="text-subtitle-1 headline text-wrap mx-2">{{order.payment.delivery}}</div>
-            <div class="text-subtitle-1 headline text-wrap mx-2">{{order.payment.payment}}</div>
-          </v-col>
-        <!-- </v-list-item-content> -->
-      </v-col>
-    </v-card>
+    <template v-else>
+      <v-card
+        class="mx-auto d-flex align-center"
+        outlined
+        v-for="order in orders"
+        :key="order._id"
+      >
+        <v-col cols="12" class="d-flex align-center justify-space-between flex-wrap">
+          <!-- <v-list-item-content > -->
+            <v-col cols="12" class="py-0">
+              <div class="overline">{{getTime(order.date)}}</div>
+            </v-col>
+            <v-col cols="12" class="col-sm-6 d-flex justify-space-around">
+              <router-link :to="{ name: 'OrderDetail', params: { status , orderId: order._id }}">
+                <div class="overline mb-1"> {{order._id.slice(-8)}}</div>
+              </router-link>
+              <div class="overline mb-1"> {{order.products.length}}件商品</div>
+              <div class="overline mb-1"> ${{order.payment.totalPrice}}</div>
+            </v-col>
+            <v-col cols="12" class="py-0 col-sm-6 d-flex justify-end justify-sm-space-around">
+              <div class="text-subtitle-1 headline text-wrap mx-2">{{order.payment.delivery}}</div>
+              <div class="text-subtitle-1 headline text-wrap mx-2">{{order.payment.payment}}</div>
+            </v-col>
+          <!-- </v-list-item-content> -->
+        </v-col>
+      </v-card>
+    </template>
     <!-- </transition-group> -->
   </v-container>
 </template>
