@@ -33,7 +33,7 @@
           color="primary"
           indeterminate
         ></v-progress-circular>
-    </v-container>
+      </v-container>
       <v-data-table
       v-if="!isLoading"
       :headers="headers"

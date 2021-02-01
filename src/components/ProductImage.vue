@@ -4,7 +4,7 @@
       <v-img
         contain
         class="img-height"
-        :lazy-src="showImg"
+        :lazy-src="require('../assets/white.jpg')"
         :src="showImg"
       ></v-img>
     </router-link>
