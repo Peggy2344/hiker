@@ -18,7 +18,7 @@
             <hr class="hr">
           </v-col>
         </v-row>
-        <v-row class="d-flex flex-wrap align-center justify-center col-lg-10 col-12 pa-0">
+        <v-row class="vh-100 d-flex flex-wrap align-center justify-center col-lg-10 col-12 pa-0">
           <v-col cols="12" class="col-lg-10 col-xl-8 transformY">
             <router-view></router-view>
           </v-col>

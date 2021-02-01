@@ -2,8 +2,8 @@
   <v-app>
     <v-container class="d-flex justify-center align-center">
     <Navbar />
-    <v-row class="d-flex justify-center align-center transformY">
-      <v-col cols="10" class="col-md-10 col-lg-7 transformY">
+    <v-row class="d-flex justify-center align-center mt-15">
+      <v-col cols="10" class="col-md-10 col-lg-7 mt-15">
         <v-stepper v-model="e1">
           <v-stepper-header>
             <v-stepper-step
@@ -241,6 +241,7 @@
                 </v-btn>
 
                 <v-btn
+                  :disabled="isLoading"
                   color="primary"
                   @click="submitHandler"
                   outlined
@@ -275,7 +276,7 @@
           </v-stepper-items>
         </v-stepper>
       </v-col>
-      <v-col cols="12" class="col-lg-4 transformY">
+      <v-col cols="12" class="col-lg-4 mt-15">
         <template>
           <v-card
             outlined
@@ -385,7 +386,8 @@ export default {
         cvv: '',
         expYear: '',
         expMonth: ''
-      }
+      },
+      isLoading: true
     }
   },
   computed: {
@@ -448,11 +450,13 @@ export default {
       }
     },
     async completeSubmit () {
+      this.isLoading = true
       this.SET_ORDER_DETAIL(this.orderDetail)
       await completeOrder({ userId: this.user.id, orderId: this.orderId }, { payment: this.orderDetail })
       this.SET_CART({ cartList: [], orderId: '' })
       this.RESET_CART()
       window.localStorage.removeItem('hiker-cart')
+      this.isLoading = false
       this.e1 = 3
     }
   },
@@ -464,9 +468,9 @@ export default {
 </script>
 
 <style>
-.transformY{
+/* .transformY{
   transform: translateY(60px);
-}
+} */
 #app .checkout_btn span.v-btn__content{
   color: inherit;
   font-size: 1rem;

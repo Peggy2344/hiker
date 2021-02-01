@@ -253,7 +253,7 @@ export default {
 .fadeIn-leave-to {
   animation: fade-in .8s ease-in-out reverse;
 }
-.v-application .breadcrumbs ul {
+.v-application ul.breadcrumbs {
   padding-left: 0px;
 }
 @keyframes fade-in {
