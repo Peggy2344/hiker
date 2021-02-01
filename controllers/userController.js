@@ -19,7 +19,7 @@ export const createUser = async (req, res) => {
       username: req.body.username,
       password: md5(req.body.password),
       email: req.body.email,
-      role: 'admin',
+      role: 'user',
       joinDate: Date.now()
     })
     res.status(200).send({
