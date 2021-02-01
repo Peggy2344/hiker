@@ -4,6 +4,7 @@
       <v-img
         contain
         class="img-height"
+        :lazy-src="showImg"
         :src="showImg"
       ></v-img>
     </router-link>
