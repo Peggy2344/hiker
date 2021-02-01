@@ -52,7 +52,7 @@ export default {
       path: process.env.VUE_APP_API,
       swiperOptions: {
         slidesPerView: 2,
-        spaceBetween: 30,
+        spaceBetween: 50,
         centeredSlides: true,
         pagination: {
           el: '.swiper-pagination'

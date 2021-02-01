@@ -3,7 +3,7 @@
     <Navbar />
     <v-row class="ma-5 mt-5 d-flex transformY flex align-center justify-space-between">
       <v-col cols="8" class="col-lg-4 mr-auto px-0">
-        <v-breadcrumbs v-if="products.length" :items="items" large>
+        <v-breadcrumbs v-if="products.length" :items="items" large class="breadcrumbs">
           <template v-slot:divider>
             <v-icon>mdi-chevron-right</v-icon>
           </template>
@@ -253,6 +253,9 @@ export default {
 }
 .fadeIn-leave-to {
   animation: fade-in .8s ease-in-out reverse;
+}
+.v-application .breadcrumbs ul {
+  padding-left: 0px;
 }
 @keyframes fade-in {
   0% {

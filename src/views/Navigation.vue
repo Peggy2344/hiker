@@ -13,7 +13,7 @@
       </div>
       <v-row class="ma-auto margin-lg pa-sm-10">
         <v-col cols="12">
-          <v-breadcrumbs v-if="products.length" :items="items" large>
+          <v-breadcrumbs v-if="products.length" :items="items" class="breadcrumbs" large>
             <template v-slot:divider>
               <v-icon>mdi-chevron-right</v-icon>
             </template>
@@ -157,6 +157,9 @@ export default {
 .text-orange-link:hover{
   background: var(--v-sidebar-base);
   color: var(--v-words-base);
+}
+.v-application .breadcrumbs ul {
+  padding-left: 0px;
 }
 @media (min-width: 576px) {
   .category{
