@@ -1,9 +1,9 @@
 <template>
   <v-app app class="home">
     <Navbar />
-    <v-row class="ma-5 mt-5 d-flex transformY flex align-center justify-space-between">
+    <v-row class="ma-5 mt-5 d-flex transformY flex align-center justify-space-between" v-if="!isLoading">
       <v-col cols="8" class="col-lg-4 mr-auto px-0">
-        <v-breadcrumbs v-if="products.length" :items="items" large>
+        <v-breadcrumbs v-if="products.length" :items="items" large class="breadcrumbs">
           <template v-slot:divider>
             <v-icon>mdi-chevron-right</v-icon>
           </template>
@@ -16,18 +16,18 @@
         </div>
       </v-col>
     </v-row>
-    <v-row class="ma-5 mt-15 d-flex flex mb-auto">
-      <template v-if="isLoading">
-        <v-col cols="6" class="col-lg-3 col-md-4 px-1 py-0 mb-10 d-flex justify-center border-bottom height_for_card"
-          v-for="index in 8"
-          :key="index">
-          <v-skeleton-loader
-            width="80%"
-            type="card, article"
-          ></v-skeleton-loader>
-        </v-col>
-      </template>
-      <template v-else-if="productsData.length">
+    <v-row v-if="isLoading" class="ma-5 mt-15 d-flex transformY flex mb-auto">
+      <v-col cols="6" class="col-lg-3 col-md-4"
+        v-for="index in 4"
+        :key="index">
+        <v-skeleton-loader
+          class="mx-auto"
+          type="card"
+        ></v-skeleton-loader>
+      </v-col>
+    </v-row>
+    <v-row class="ma-5 mt-5 d-flex transformY flex mb-auto" v-if="!isLoading">
+      <template v-if="productsData.length">
         <v-col cols="6" class="col-lg-3 col-md-4 px-1 py-0 mb-10 d-flex justify-center border-bottom height_for_card" v-for="product in products" :key="product._id">
           <ProductCard :product="product" class=" index_above" />
         </v-col>
@@ -253,6 +253,9 @@ export default {
 }
 .fadeIn-leave-to {
   animation: fade-in .8s ease-in-out reverse;
+}
+.v-application ul.breadcrumbs {
+  padding-left: 0px;
 }
 @keyframes fade-in {
   0% {

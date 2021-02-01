@@ -6,7 +6,7 @@
     <swiper-slide v-for="hotsale in hotsales" :key="hotsale._id">
         <v-row>
             <v-col cols="12" class="white-background vh-35 d-flex justify-center align-center pa-0 mr-sm-15 mb-3">
-              <v-img :src="path + '/products/file/' + hotsale.productImg[0].file" max-height="250px" contain></v-img>
+              <v-img :lazy-src="require('../assets/white.jpg')" :src="path + '/products/file/' + hotsale.productImg[0].file" max-height="250px" contain></v-img>
             </v-col>
             <v-col cols="12" class="vh-20 py-5 d-flex justify-center align-center flex-column">
               <!-- <v-list-item-content> -->
