@@ -42,6 +42,7 @@
 
         <v-text-field
           v-model="passwordCheck"
+          @keyup="submitHandler"
           :rules="passwordCheckRules"
           label="請再次確認密碼"
           validate-on-blur
