@@ -132,7 +132,7 @@ export default {
       this.isLoading = false
     }
   },
-    mounted () {
+  mounted () {
     if (this.user.role === 'admin') {
       const { userId, orderId } = this.$route.params
       this.fetchData({ userId, orderId })
