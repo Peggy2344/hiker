@@ -124,12 +124,14 @@ export default {
               this.$router.push({ name: 'Login' })
             })
           } else {
+            this.pending = false
             this.$swal({
               icon: 'error',
               title: res.data.message
             })
           }
         } catch (err) {
+          this.pending = false
           this.$swal({
             icon: 'error',
             title: err.response.data.message
