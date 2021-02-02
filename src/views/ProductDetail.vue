@@ -340,11 +340,13 @@ export default {
       if (!this.user.id) {
         this.$swal.fire({
           text: '請先登入再留言!',
+          reverseButtons: true,
           icon: 'warning',
           showCancelButton: true,
           confirmButtonColor: '#3085d6',
           cancelButtonColor: '#d33',
-          confirmButtonText: '登入'
+          confirmButtonText: '登入',
+          cancelButtonText: '取消'
         }).then((result) => {
           if (result.isConfirmed) {
             this.$router.push({ name: 'Login' })

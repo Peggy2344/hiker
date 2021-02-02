@@ -36,3 +36,6 @@ export const postQuestionReply = ({ productId, questionId }, params) => {
 export const editStatus = ({ userId, orderId }, params) => {
   return api.patch(`/admin/order/${userId}?orderId=${orderId}`, params)
 }
+export const editComment = ({ productId, commentId }, params) => {
+  return api.patch(`/admin/product/${productId}/comment?commentId=${commentId}`, params)
+}

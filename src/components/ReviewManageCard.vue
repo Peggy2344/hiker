@@ -26,17 +26,17 @@
         <div class="overline mb-1 col-6 col-lg-3"> {{comment.title}}</div>
         <div class="overline mb-1 col-6 col-lg-4"> {{comment.message}}</div>
       </v-col>
-      <v-col cols="12">
+      <v-col cols="12" class="col-lg-6 d-flex justify-start align-center">
         <div class="mx-5">
           顯示狀態: {{ comment.display ?  '顯示' : '不顯示'}}
         </div>
-        <v-btn v-if="!comment.display" icon color="confirm" @click="cancel">
-          <v-icon>
+        <v-btn :disabled="!comment.display" icon class="mx-3" @click="displayHandler(false)">
+          <v-icon color="confirm">
             mdi-cancel
           </v-icon>
         </v-btn>
-        <v-btn v-else color="confirm" @click="cancel">
-          顯示
+        <v-btn :disabled="comment.display" color="confirm" @click="displayHandler(true)">
+          恢復顯示
         </v-btn>
       </v-col>
     </v-col>
@@ -44,16 +44,53 @@
 </template>
 
 <script>
+import { editComment } from '../apis/admin'
 import dayjs from 'dayjs'
 export default {
-  props: ['comment'],
+  props: ['comment', 'productId'],
   data () {
     return {
+      isLoading: false
     }
   },
   methods: {
     getTime (time) {
       return dayjs(time).format('YYYY/MM/DD')
+    },
+    displayHandler (boolean) {
+      if (!boolean) {
+        this.$swal.fire({
+          reverseButtons: true,
+          text: '確定要禁用此評論?',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#ed5e68',
+          cancelButtonText: '取消',
+          cancelButtonColor: '#8388a4',
+          confirmButtonText: '確定'
+        }).then(async (result) => {
+          if (result.isConfirmed) {
+            await editComment({ productId: this.productId, commentId: this.comment._id }, { display: boolean })
+            this.comment.display = boolean
+          }
+        })
+      } else {
+        this.$swal.fire({
+          reverseButtons: true,
+          text: '確定要恢復此評論?',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#ed5e68',
+          cancelButtonColor: '#8388a4',
+          cancelButtonText: '取消',
+          confirmButtonText: '確定'
+        }).then(async (result) => {
+          if (result.isConfirmed) {
+            await editComment({ productId: this.productId, commentId: this.comment._id }, { display: boolean })
+            this.comment.display = boolean
+          }
+        })
+      }
     }
   },
   mounted () {
