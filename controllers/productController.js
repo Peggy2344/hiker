@@ -246,3 +246,32 @@ export const postQuestionReply = async (req, res) => {
     res.status(500).send({ success: false, message: '伺服器錯誤' })
   }
 }
+export const editComment = async (req, res) => {
+  if (req.session.user === undefined) {
+    res.status(401).send({ success: false, message: '未登入' })
+    return
+  }
+  if (req.session.user.role !== 'admin') {
+    res.status(401).send({ success: false, message: '沒有權限' })
+    return
+  }
+  if (!req.headers['content-type'].includes('application/json')) {
+    res.status(400).send({ success: false, message: '格式錯誤' })
+  }
+  try {
+    await product.update(
+      {
+        _id: req.params.productId
+      },
+      {
+        $set: {
+          'comments.$[outer].display': req.body.display
+        }
+      },
+      { arrayFilters: [{ 'outer._id': req.query.commentId }] }
+    )
+    res.status(200).send({ success: true, message: 'success' })
+  } catch (error) {
+    res.status(500).send({ success: false, message: '伺服器錯誤' })
+  }
+}
