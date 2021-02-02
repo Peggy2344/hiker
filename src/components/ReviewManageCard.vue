@@ -27,6 +27,12 @@
         <div class="overline mb-1 col-6 col-lg-4"> {{comment.message}}</div>
       </v-col>
       <v-col cols="12" class="col-lg-6 d-flex justify-start align-center">
+        <v-snackbar
+          centered
+          v-model="isLoading"
+          >
+          更新中... 
+        </v-snackbar>
         <div class="mx-5">
           顯示狀態: {{ comment.display ?  '顯示' : '不顯示'}}
         </div>
@@ -70,7 +76,9 @@ export default {
           confirmButtonText: '確定'
         }).then(async (result) => {
           if (result.isConfirmed) {
+            this.isLoading = true
             await editComment({ productId: this.productId, commentId: this.comment._id }, { display: boolean })
+            this.isLoading = false
             this.comment.display = boolean
           }
         })
@@ -86,7 +94,9 @@ export default {
           confirmButtonText: '確定'
         }).then(async (result) => {
           if (result.isConfirmed) {
+            this.isLoading = true
             await editComment({ productId: this.productId, commentId: this.comment._id }, { display: boolean })
+            this.isLoading = false
             this.comment.display = boolean
           }
         })

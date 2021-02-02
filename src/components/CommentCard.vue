@@ -48,7 +48,7 @@ export default {
   },
   methods: {
     getTimeFromNow (time) {
-      return dayjs(time).fromNow()
+      return dayjs(time).locale('zh-tw').fromNow()
     },
     async fetchComment () {
       const comment = await getComment({ productId: this.productId, commentId: this.comment })
