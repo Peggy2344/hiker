@@ -29,7 +29,6 @@ export default {
               //   title: '錯誤',
               //   text: '登入時效已過'
               // })
-
               this.$store.commit('logout')
 
               if (this.$route.path !== '/') {

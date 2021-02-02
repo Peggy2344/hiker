@@ -256,6 +256,11 @@ export default {
 .v-application ul.breadcrumbs {
   padding-left: 0px;
 }
+@media (min-width:992px) {
+.v-application ul.breadcrumbs {
+  padding-left: 10px;
+  }
+}
 @keyframes fade-in {
   0% {
     transform: translateY(-100%);

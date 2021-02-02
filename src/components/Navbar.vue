@@ -102,7 +102,7 @@
       </v-btn>
     </v-app-bar>
     <v-navigation-drawer
-      class="sidebar"
+      class="sidebar py-15"
       color="sidebar"
       app
       temporary
