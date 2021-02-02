@@ -174,13 +174,14 @@
             class="text-center"
           >
             <v-btn
+              :disabled="isLoading"
               color="words"
               dark
               v-on="on"
               class="width-80"
               @click.stop.prevent="itemdetail.status === 'create' ? submitHandler() : editHandler()"
             >
-              送出
+              {{ isLoading ? '送出中' : '送出'}}
             </v-btn>
           </v-col>
         </v-row>
@@ -238,7 +239,8 @@ export default {
       navigationItems: [],
       categoryItems: [],
       classificationData: [],
-      details: []
+      details: [],
+      isLoading: false
     }
   },
   methods: {
@@ -316,8 +318,10 @@ export default {
     async submitHandler () {
       const formData = this.formHandler()
       try {
+        this.isLoading = true
         const res = await postProduct(formData)
         if (res.data.success) {
+          this.isLoading = false
           this.$swal({
             icon: 'success',
             iconColor: '#FF5A17',
@@ -330,6 +334,7 @@ export default {
           this.$emit('update', res.data.result)
         }
       } catch (error) {
+        this.isLoading = false
         console.log(error)
       }
     },
@@ -337,8 +342,10 @@ export default {
       this.itemdetail.productImg = this.editItem.productImg
       delete this.itemdetail.urls
       try {
+        this.isLoading = true
         const res = await editProduct({ productId: this.editItem._id }, this.itemdetail)
         if (res.data.success) {
+          this.isLoading = false
           this.$swal({
             icon: 'success',
             iconColor: 'brightGreen',
@@ -349,6 +356,7 @@ export default {
           })
         }
       } catch (error) {
+        this.isLoading = false
         console.log(error)
       }
     },

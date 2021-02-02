@@ -343,8 +343,8 @@ export default {
           reverseButtons: true,
           icon: 'warning',
           showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
+          confirmButtonColor: '#ed5e68',
+          cancelButtonColor: '#8388a4',
           confirmButtonText: '登入',
           cancelButtonText: '取消'
         }).then((result) => {

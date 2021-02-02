@@ -31,7 +31,7 @@
           </select>
         </div>
         <div v-else class="col-7 overline mb-1">狀態: {{order.status}}</div>
-        <div class="mx-lg-5 col-5">
+        <div class="mx-lg-5 col-7">
           <template v-if="edit">
             <v-btn
               class="edit_btn mx-lg-1 my-1"
@@ -47,9 +47,10 @@
               outlined
               small
               color="primary"
+              :disabled="updating"
               @click="update"
               >
-              更新
+              {{ updating ? '更新中' : '更新'}}
             </v-btn>
           </template>
           <template v-else>
@@ -79,7 +80,8 @@ export default {
     return {
       edit: false,
       status: '',
-      isLoading: true
+      isLoading: true,
+      updating: false
     }
   },
   methods: {
@@ -94,6 +96,7 @@ export default {
       this.edit = false
     },
     async update () {
+      this.updating = true
       const param = {
         status: this.status,
         handleStatus: ''
@@ -101,6 +104,7 @@ export default {
       this.status === '已完成' ? param.handleStatus = 'finish' : param.handleStatus = 'process'
       const res = await editStatus({ userId: this.userId, orderId: this.order._id }, param)
       if (res.status === 200) {
+        this.updating = false
         this.$swal({
           icon: 'success',
           title: '更新成功'
