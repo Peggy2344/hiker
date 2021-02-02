@@ -26,19 +26,19 @@
         <div class="overline mb-1 col-6 col-lg-3"> {{comment.title}}</div>
         <div class="overline mb-1 col-6 col-lg-4"> {{comment.message}}</div>
       </v-col>
-    </v-col>
-    <v-col cols="12">
-      <div class="mx-5">
-        顯示狀態: {{ comment.display ?  '顯示' : '不顯示'}}
-      </div>
-      <v-btn v-if="!comment.display" icon color="confirm" @click="cancel">
-        <v-icon>
-          mdi-cancel
-        </v-icon>
-      </v-btn>
-      <v-btn v-else icon color="confirm" @click="cancel">
-        顯示
-      </v-btn>
+      <v-col cols="12">
+        <div class="mx-5">
+          顯示狀態: {{ comment.display ?  '顯示' : '不顯示'}}
+        </div>
+        <v-btn v-if="!comment.display" icon color="confirm" @click="cancel">
+          <v-icon>
+            mdi-cancel
+          </v-icon>
+        </v-btn>
+        <v-btn v-else color="confirm" @click="cancel">
+          顯示
+        </v-btn>
+      </v-col>
     </v-col>
   </v-card>
 </template>
