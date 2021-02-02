@@ -1,5 +1,13 @@
 <template>
-  <v-container class="d-flex flex-wrap justify-center align-center w-100" v-if="!isLoading">
+  <v-container class="d-flex flex-wrap justify-center align-center w-100">
+    <v-container v-if="isLoading" class="progress">
+      <v-progress-circular
+        :size="50"
+        color="primary"
+        indeterminate
+      ></v-progress-circular>
+    </v-container>
+    <template v-else>
       <v-col cols="2" class="col-lg-2">
         {{commentData.userName}}
       </v-col>
@@ -21,6 +29,7 @@
           {{getTimeFromNow(commentData.releaseDate)}}
         </span>
       </v-col>
+    </template>
   </v-container>
 </template>
 

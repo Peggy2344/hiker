@@ -539,6 +539,7 @@ export default {
   }
   .ordercard{
     position: relative;
+    right: 0;
   }
 }
 </style>
