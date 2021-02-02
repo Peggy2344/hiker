@@ -112,7 +112,7 @@ export default {
       }
       // const index = this.cart.indexOf(item)
       if (this.user.id) {
-        await delOrder({ userId: this.user.id, orderId: this.orderId, pId: item.productId })
+        await delOrder({ userId: this.user.id, orderId: this.orderId, pId: item._id })
       }
       this.$emit('delCart', item)
       // this.cart.splice(index, 1)
