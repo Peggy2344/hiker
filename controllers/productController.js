@@ -103,6 +103,7 @@ export const postComment = async (req, res) => {
     return res.status(400).send({ success: false, message: '您已留過評論' })
   }
   try {
+    req.body.releaseDate = Date.now()
     const result = await product.findByIdAndUpdate(req.params.productId, {
       $push: {
         comments: req.body
@@ -203,6 +204,7 @@ export const postQuestion = async (req, res) => {
     res.status(400).send({ success: false, message: '格式錯誤' })
   }
   try {
+    req.body.releaseDate = Date.now()
     const result = await product.findByIdAndUpdate(req.params.productId, {
       $push: {
         questions: req.body
