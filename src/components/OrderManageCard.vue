@@ -11,7 +11,7 @@
       <v-col cols="12" class="col-sm-6 col-md-5 col-lg-5 d-flex align-center justify-space-around">
         <div class="d-flex flex-column">
           <div class="overline mb-1">訂單編號</div>
-          <router-link :to="{ name: 'OrderDetail', params: { status: 'process', orderId: order._id }}">
+          <router-link :to="{ name: 'AdminOrderDetail', params: { orderId: order._id, userId  }}">
             <div class="overline mb-1"> {{order._id.slice(-8)}}</div>
           </router-link>
         </div>

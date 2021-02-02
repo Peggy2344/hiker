@@ -115,8 +115,13 @@ export default {
     ...mapState(['user'])
   },
   methods: {
-    async fetchData (orderId) {
-      const result = await getOrder({ userId: this.user.id, orderId })
+    async fetchData (data) {
+      let result = {}
+      if (this.user.role === 'admin') {
+        result = await getOrder({ userId: data.userId, orderId: data.orderId })
+      } else {
+        result = await getOrder({ userId: this.user.id, orderId: data.orderId })
+      }
       this.order = result.data.orderList
       this.order.products.forEach(async item => {
         const data = await getProduct({ productId: item.productId })
@@ -127,16 +132,25 @@ export default {
       this.isLoading = false
     }
   },
-  mounted () {
-    const { orderId } = this.$route.params
-    this.fetchData(orderId)
+    mounted () {
+    if (this.user.role === 'admin') {
+      const { userId, orderId } = this.$route.params
+      this.fetchData({ userId, orderId })
+    } else {
+      const { orderId } = this.$route.params
+      this.fetchData(orderId)
+    }
   },
   beforeRouteUpdate (to, from, next) {
-    const { orderId } = to.params
-    this.fetchData(orderId)
+    if (this.user.role === 'admin') {
+      const { userId, orderId } = to.params
+      this.fetchData({ userId, orderId })
+    } else {
+      const { orderId } = to.params
+      this.fetchData({ orderId })
+    }
     next()
   }
-
 }
 </script>
 

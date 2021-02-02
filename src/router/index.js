@@ -136,6 +136,11 @@ const routes = [
         component: OrderManagement
       },
       {
+        path: 'user/:userId/order/:orderId',
+        name: 'AdminOrderDetail',
+        component: OrderDetailPage
+      },
+      {
         path: 'mainpage-management',
         name: 'mainpage-management',
         component: MainpageManage

@@ -58,7 +58,6 @@ export default {
           })
         })
         ary.sort((a, b) => {
-          console.log(b.orders[0].date)
           return new Date(b.orders[0].date) - new Date(a.orders[0].date)
         })
       }
