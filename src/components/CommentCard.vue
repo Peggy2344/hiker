@@ -1,6 +1,6 @@
 <template>
   <v-container class="d-flex flex-wrap justify-center align-center w-100">
-    <v-container v-if="isLoading" class="progress">
+    <v-container v-if="isLoading" class="d-flex justify-center">
       <v-progress-circular
         :size="50"
         color="primary"
@@ -48,7 +48,7 @@ export default {
   },
   methods: {
     getTimeFromNow (time) {
-      return dayjs(time).locale('zh-tw').fromNow()
+      return dayjs(time).fromNow()
     },
     async fetchComment () {
       const comment = await getComment({ productId: this.productId, commentId: this.comment })
