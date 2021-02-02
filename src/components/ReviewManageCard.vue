@@ -31,7 +31,7 @@
           centered
           v-model="isLoading"
           >
-          更新中... 
+          更新中...
         </v-snackbar>
         <div class="mx-5">
           顯示狀態: {{ comment.display ?  '顯示' : '不顯示'}}
