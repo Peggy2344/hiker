@@ -301,7 +301,7 @@ export default {
         const data = await getProduct({ productId })
         const comments = await getComments({ productId })
         const questions = await getQuestions({ productId })
-        this.comments = comments.data.result
+        this.comments = comments.data.result.filter(comment => comment.display)
         this.questions = questions.data.result
         if (!data.data.success) throw new Error(data.message)
         this.product = data.data.result[0]

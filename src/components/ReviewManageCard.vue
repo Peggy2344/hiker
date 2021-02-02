@@ -41,7 +41,7 @@
             mdi-cancel
           </v-icon>
         </v-btn>
-        <v-btn :disabled="comment.display" color="confirm" @click="displayHandler(true)">
+        <v-btn :disabled="comment.display" small color="confirm" @click="displayHandler(true)">
           恢復顯示
         </v-btn>
       </v-col>

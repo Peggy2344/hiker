@@ -9,7 +9,10 @@
   >
     <v-col cols="12" class="col-md-2 d-flex flex-column align-center justify-center flex-wrap">
       <v-col cols="8" class="col-lg-10">
-        <v-img :src="env + '/products/file/' + product.productImg[0].file"></v-img>
+        <router-link :to="{name: 'ProductDetail', params: {productId: product._id} }">
+          <v-img :src="env + '/products/file/' + product.productImg[0].file" >
+          </v-img>
+        </router-link>
       </v-col>
       <div class="overline">{{product.brand}}</div>
       <div class="overline text-center">{{product.productName}}</div>
