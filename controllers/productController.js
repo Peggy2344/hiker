@@ -77,8 +77,7 @@ export const getFile = async (req, res) => {
     // heroku情況下
     axios({
       method: 'GET',
-      url: 'http://' + process.env.FTP_HOST + '/' + process.env.FTP_USER + '/' + req.params.file,
-      responseType: 'stream'
+      url: 'http://' + process.env.FTP_HOST + '/' + process.env.FTP_USER + '/' + req.params.file
     }).then(response => {
       response.data.pipe(res)
     }).catch((error) => {
@@ -131,7 +130,7 @@ export const getComment = async (req, res) => {
     } else if (!req.query.commentId) {
       const Comments = await product.findById(req.params.productId)
       const result = Comments.comments.map(item => {
-        return { _id: item._id, star: item.star }
+        return { _id: item._id, star: item.star, display: item.display }
       })
       return res.status(200).send({ success: true, message: 'success', result })
     }
@@ -140,7 +139,7 @@ export const getComment = async (req, res) => {
     const comment = Comment[0].comments.find(item => {
       return item._id.toString() === req.query.commentId
     })
-    const { star, title, message, releaseDate } = comment
+    const { star, title, message, releaseDate, display } = comment
     const result = await users.findById(comment.u_id)
     const userName = result ? result.username : '匿名'
     return res.status(200).send({
@@ -151,7 +150,8 @@ export const getComment = async (req, res) => {
         star,
         title,
         message,
-        releaseDate
+        releaseDate,
+        display
       }
     })
   } catch (error) {
@@ -238,6 +238,35 @@ export const postQuestionReply = async (req, res) => {
         }
       },
       { arrayFilters: [{ 'outer._id': req.query.questionId }] }
+    )
+    res.status(200).send({ success: true, message: 'success' })
+  } catch (error) {
+    res.status(500).send({ success: false, message: '伺服器錯誤' })
+  }
+}
+export const editComment = async (req, res) => {
+  if (req.session.user === undefined) {
+    res.status(401).send({ success: false, message: '未登入' })
+    return
+  }
+  if (req.session.user.role !== 'admin') {
+    res.status(401).send({ success: false, message: '沒有權限' })
+    return
+  }
+  if (!req.headers['content-type'].includes('application/json')) {
+    res.status(400).send({ success: false, message: '格式錯誤' })
+  }
+  try {
+    await product.update(
+      {
+        _id: req.params.productId
+      },
+      {
+        $set: {
+          'comments.$[outer].display': req.body.display
+        }
+      },
+      { arrayFilters: [{ 'outer._id': req.query.commentId }] }
     )
     res.status(200).send({ success: true, message: 'success' })
   } catch (error) {
