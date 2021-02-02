@@ -1,7 +1,7 @@
 <template>
   <v-container class="d-flex flex-column justify-center align-center pa-0 px-sm-10 py-sm-5">
     <v-row cols="12" class="w100 flex-row flex-wrap justify-start align-center px-0">
-      <v-container v-if="isLoading" class="progress">
+      <v-container v-if="isLoading" class="d-flex justify-center">
         <v-progress-circular
           :size="50"
           color="primary"

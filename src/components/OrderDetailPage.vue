@@ -138,7 +138,7 @@ export default {
       this.fetchData({ userId, orderId })
     } else {
       const { orderId } = this.$route.params
-      this.fetchData(orderId)
+      this.fetchData({ orderId })
     }
   },
   beforeRouteUpdate (to, from, next) {
