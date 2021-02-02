@@ -70,9 +70,7 @@ export default {
       } else {
         this.orders = result.data.orderList
       }
-      setTimeout(() => {
-        this.isLoading = false
-      }, 3000)
+      this.isLoading = false
     }
   },
   mounted () {

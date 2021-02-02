@@ -35,6 +35,7 @@
         color="primary"
         height="35px"
         width="100%"
+        :disabled="isLoading"
         @click.stop.prevent="submitHandler()"
       >
         送出
@@ -60,7 +61,8 @@ export default {
       ],
       messageRules: [
         v => !!v || '評論內容為必填'
-      ]
+      ],
+      isLoading: false
     }
   },
   computed: {
@@ -71,10 +73,12 @@ export default {
   methods: {
     async submitHandler () {
       try {
+        this.isLoading = true
         this.comment.u_id = this.user.id
         const comment = { ...this.comment }
         const result = await postComment({ productId: this.productId }, comment)
         if (result.status !== 200) throw new Error(result.data.message)
+        this.isLoading = false
         this.$emit('after-comment', result.data.comments)
         this.$swal({
           icon: 'success',
@@ -84,6 +88,7 @@ export default {
         this.comment.title = ''
         this.comment.message = ''
       } catch (error) {
+        this.isLoading = false
         this.$swal({
           icon: 'error',
           text: error.response.data.message

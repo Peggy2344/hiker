@@ -25,6 +25,7 @@
         color="primary"
         height="35px"
         width="100%"
+        :disabled="isLoading"
         @click.stop.prevent="submitHandler()"
       >
         送出
@@ -49,16 +50,18 @@ export default {
       ],
       messageRules: [
         v => !!v || '評論內容為必填'
-      ]
+      ],
+      isLoading: false
     }
   },
   methods: {
     async submitHandler () {
       try {
+        this.isLoading = true
         const question = { ...this.question }
         const result = await postQuestion({ productId: this.productId }, question)
         if (result.status !== 200) throw new Error(result.data.message)
-        console.log(result.data)
+        this.isLoading = false
         this.$emit('after-question', result.data.questions)
         this.$swal({
           icon: 'success',
@@ -67,6 +70,7 @@ export default {
         this.question.userName = ''
         this.question.message = ''
       } catch (error) {
+        this.isLoading = false
         this.$swal({
           icon: 'error',
           text: error.response.data.message
