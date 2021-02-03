@@ -6,8 +6,10 @@
       v-if="product.productImg"
       >
         <v-col cols="4" class="col-lg-3">
-        <v-img :lazy-src="require('../assets/222.jpeg')" :src="env + '/products/file/' + product.productImg[0].file" >
-        </v-img>
+          <router-link :to="{name: 'ProductDetail', params: {productId: product._id} }">
+            <v-img :lazy-src="require('../assets/222.jpeg')" :src="env + '/products/file/' + product.productImg[0].file" >
+            </v-img>
+          </router-link>
         </v-col>
         <v-list-item three-line class="col-5">
           <v-list-item-content>
