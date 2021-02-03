@@ -321,13 +321,13 @@ export default {
         this.isLoading = true
         const res = await postProduct(formData)
         if (res.data.success) {
-          this.isLoading = false
           this.$swal({
             icon: 'success',
             iconColor: '#FF5A17',
             confirmButtonColor: '#356859',
             title: '上傳成功'
           })
+          this.isLoading = false
           this.itemdetail = { ...this.editItem }
           this.itemdetail.urls = []
           this.itemdetail.productImg = []
