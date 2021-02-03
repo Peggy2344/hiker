@@ -175,13 +175,13 @@
           >
             <v-btn
               :disabled="isLoading"
-              color="words"
+              color="primary"
               dark
               v-on="on"
               class="width-80"
               @click.stop.prevent="itemdetail.status === 'create' ? submitHandler() : editHandler()"
             >
-              {{ isLoading ? '送出中' : '送出'}}
+              {{ isLoading ? '送出中' : '送出' }}
             </v-btn>
           </v-col>
         </v-row>

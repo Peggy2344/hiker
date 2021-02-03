@@ -38,7 +38,7 @@
         :disabled="isLoading"
         @click.stop.prevent="submitHandler()"
       >
-        {{ isLoading ? '送出中' : '送出'}}
+        {{ isLoading ? '送出中' : '送出' }}
       </v-btn>
     </div>
   </form>
