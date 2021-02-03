@@ -176,7 +176,6 @@
             <v-btn
               :disabled="isLoading"
               color="primary"
-              dark
               v-on="on"
               class="width-80"
               @click.stop.prevent="itemdetail.status === 'create' ? submitHandler() : editHandler()"
