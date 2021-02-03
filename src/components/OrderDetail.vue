@@ -94,7 +94,7 @@ export default {
           title: '請先登入!',
           icon: 'warning',
           showCancelButton: true,
-          showCancelButton: true,
+          reverseButtons: true,
           confirmButtonColor: '#ed5e68',
           cancelButtonColor: '#8388a4',
           cancelButtonText: '取消',
