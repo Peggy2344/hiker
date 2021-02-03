@@ -94,8 +94,10 @@ export default {
           title: '請先登入!',
           icon: 'warning',
           showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
+          showCancelButton: true,
+          confirmButtonColor: '#ed5e68',
+          cancelButtonColor: '#8388a4',
+          cancelButtonText: '取消',
           confirmButtonText: '登入'
         }).then((result) => {
           if (result.isConfirmed) {
