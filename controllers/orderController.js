@@ -14,8 +14,8 @@ export const postOrder = async (req, res) => {
     // const orderList = await user.find({ _id: req.params.userId, 'orders.checkoutStatus': false })
     // if (orderList.length) return res.status(400).send({ success: false, message: '已有訂單' })
     // 檢查是否有商品
-    const buyProduct = await product.findById(req.body.productId)
-    if (!buyProduct) return res.status(400).send({ success: false, message: '沒有此商品' })
+    // const buyProduct = await product.findById(req.body.productId)
+    // if (!buyProduct) return res.status(400).send({ success: false, message: '沒有此商品' })
     // if (req.body.detailId) {
     //   inventory = buyProduct[0].details.id(req.body.detailId).inStock
     // } else {
@@ -24,78 +24,34 @@ export const postOrder = async (req, res) => {
     // 檢查庫存
     // if ((inventory - req.body.quantity) < 0) return res.status(400).send({ success: false, message: '庫存不足' })
     if (req.query.orderId) {
-      if (req.body.detailId) {
-        await user.update(
-          {
-            'orders._id': req.query.orderId
-          },
-          {
-            $push: {
-              'orders.$[order].products': {
-                productId: req.body.productId,
-                detailId: req.body.detailId,
-                quantity: req.body.quantity
-              }
-            }
-          },
-          { arrayFilters: [{ 'order._id': req.query.orderId }] }
-        )
-      } else {
-        await user.update(
-          {
-            'orders._id': req.query.orderId
-          },
-          {
-            $push: {
-              'orders.$[order].products': {
-                productId: req.body.productId,
-                quantity: req.body.quantity
-              }
-            }
-          },
-          { arrayFilters: [{ 'order._id': req.query.orderId }] }
-        )
-      }
+      // if (req.body.detailId) {
+      await user.update(
+        {
+          'orders._id': req.query.orderId
+        },
+        {
+          $push: {
+            'orders.$[order].products':
+              req.body.order
+          }
+        },
+        { arrayFilters: [{ 'order._id': req.query.orderId }] }
+      )
       res.status(200).send({ success: true, message: 'success' })
     } else {
-      if (req.body.detailId) {
-        await user.findByIdAndUpdate(req.params.userId,
-          {
-            // 新增到使用者的訂單陣列
-            $push: {
-              orders: {
-                date: new Date(),
-                checkoutStatus: false,
-                products: [
-                  {
-                    productId: req.body.productId,
-                    detailId: req.body.detailId,
-                    quantity: req.body.quantity
-                  }
-                ]
-              }
+      await user.findByIdAndUpdate(req.params.userId,
+        {
+          // 新增到使用者的訂單陣列
+          $push: {
+            orders: {
+              date: new Date(),
+              checkoutStatus: false,
+              products:
+                req.body.order
             }
-          }, { new: true }
-        )
-      } else {
-        await user.findByIdAndUpdate(req.params.userId,
-          {
-            // 新增到使用者的訂單陣列
-            $push: {
-              orders: {
-                date: new Date(),
-                checkoutStatus: false,
-                products: [
-                  {
-                    productId: req.body.productId,
-                    quantity: req.body.quantity
-                  }
-                ]
-              }
-            }
-          }, { new: true }
-        )
-      }
+          }
+        }, { new: true }
+      )
       res.status(200).send({ success: true, message: 'success' })
     }
   } catch (error) {
@@ -107,10 +63,9 @@ export const editOrder = async (req, res) => {
   if (!req.headers['content-type'].includes('application/json')) {
     res.status(400).send({ success: false, message: '格式錯誤' })
   }
-  // if (req.session.user === undefined) return res.status(401).send({ success: false, message: '未登入' })
-  // if (req.session.user.id !== req.params.userId) return res.status(401).send({ success: false, message: '沒有權限' })
+  if (req.session.user === undefined) return res.status(401).send({ success: false, message: '未登入' })
+  if (req.session.user.id !== req.params.userId) return res.status(401).send({ success: false, message: '沒有權限' })
   try {
-    console.log(req.body)
     await user.update(
       { _id: req.params.userId },
       { $set: { 'orders.$[outer].products.$[inner].quantity': req.body.quantity } },
