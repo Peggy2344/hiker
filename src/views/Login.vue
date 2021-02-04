@@ -92,7 +92,7 @@ export default {
           })
           if (res.data.success) {
             this.$store.commit('login', res.data.user)
-            this.$store.dispatch('fetchCartList').then(() => {
+            this.$store.dispatch('fetchCartList').then(async () => {
               if (!this.cart) return
               if (this.orderId) {
                 this.cart.forEach(async item => {
@@ -103,13 +103,11 @@ export default {
                       , { quantity: item.quantity + alreadyInCart.quantity, pId: alreadyInCart._id }
                     )
                   } else {
-                    await pushOrder({ userId: this.user.id, orderId: this.orderId }, item)
+                    await pushOrder({ userId: this.user.id, orderId: this.orderId }, { order: item })
                   }
                 })
               } else {
-                this.cart.forEach(async item => {
-                  await postOrder({ userId: this.user.id }, item)
-                })
+                await postOrder({ userId: this.user.id }, { order: this.cart })
               }
               localStorage.removeItem('hiker-cart')
             })

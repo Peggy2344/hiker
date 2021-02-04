@@ -371,7 +371,7 @@ export default {
         if (!this.selectedSize) {
           this.$swal({
             icon: 'error',
-            text: '請選擇商品尺寸'
+            title: '請選擇商品尺寸'
           })
           return
         }
@@ -380,22 +380,27 @@ export default {
         if (!this.selectedColor) {
           this.$swal({
             icon: 'error',
-            text: '請選擇商品顏色'
+            title: '請選擇商品顏色'
           })
           return
         }
       }
       this.pending = true
       let alreadyInCart = {}
+      let order = {}
       if (this.detailId) {
+        order = {
+          productId: this.product._id,
+          detailId: this.detailId,
+          quantity: this.quantity
+        }
         alreadyInCart = this.cartList.find(item => item.productId === this.product._id && item.detailId === this.detailId)
       } else {
+        order = {
+          productId: this.product._id,
+          quantity: this.quantity
+        }
         alreadyInCart = this.cartList.find(item => item.productId === this.product._id)
-      }
-      const order = {
-        productId: this.product._id,
-        detailId: this.detailId,
-        quantity: this.quantity
       }
       try {
         if (this.user.id && this.orderId && alreadyInCart) {
@@ -405,9 +410,9 @@ export default {
           }
           await editOrder({ userId: this.user.id, orderId: this.orderId }, newOrder)
         } else if (this.user.id && this.orderId) {
-          await pushOrder({ userId: this.user.id, orderId: this.orderId }, order)
+          await pushOrder({ userId: this.user.id, orderId: this.orderId }, { order })
         } else if (this.user.id) {
-          await postOrder({ userId: this.user.id }, order)
+          await postOrder({ userId: this.user.id }, { order: [order] })
         }
         const { productName, brand, productImg, price } = this.product
         if (this.detailId) {
