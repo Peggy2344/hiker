@@ -4,14 +4,7 @@
     <div class="pa-0 ma-0 vw-100">
       <div class="vw-100 relative">
         <div class="vw-100 relative mb-15 mb-sm-5">
-          <v-container v-if="!isLoaded" class="d-flex align-center justify-center">
-            <v-progress-circular
-              :size="100"
-              color="primary"
-              indeterminate
-            ></v-progress-circular>
-          </v-container>
-            <img @load="onLoad" :src=img[index].src rel="preload" class="vw-100 contain">
+            <img :src="img[index].src || '@/assets/plain.png'" rel="preload" class="vw-100 contain">
             <div class="absolute category text-left">
             <p v-clock class="text-blue font-weight-bold ml-5">{{items[1].text}}</p>
             <div class="box d-flex align-center justify-space-around">
@@ -81,6 +74,9 @@ export default {
       ],
       img: [
         {
+          src: require('../assets/plain.png')
+        },
+        {
           src: require('../assets/mammut.jpg')
         },
         {
@@ -120,9 +116,9 @@ export default {
           console.log(navigation)
           this.index =
           navigation === 'men'
-            ? 0 : navigation === 'women'
-              ? 1
-              : 2
+            ? 1 : navigation === 'women'
+              ? 2
+              : 3
         }
         this.isLoading = false
       } catch (error) {
