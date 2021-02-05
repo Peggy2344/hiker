@@ -39,6 +39,12 @@
         >狀態: {{order.status}}</div>
         <div class="mx-lg-5 col-7">
           <template v-if="edit">
+            <v-snackbar
+              centered
+              v-model="updating"
+              >
+              更新中...
+            </v-snackbar>
             <v-btn
               class="edit_btn mx-lg-1 my-1"
               outlined

@@ -58,7 +58,7 @@
             </template>
           </template>
           <template v-else>
-            <div class="overline mb-1 col-lg-4">{{question.reply}}</div>
+            <div class="overline mb-1 col-lg-12">{{question.reply}}</div>
             <div class="overline mb-1 col-lg-12">{{getTime(question.replyDate)}}</div>
           </template>
         </div>

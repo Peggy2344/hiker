@@ -4,14 +4,23 @@
     <div class="pa-0 ma-0 vw-100">
       <div class="vw-100 relative">
         <div class="vw-100 relative mb-15 mb-sm-5">
-        <img v-show="isLoaded" @load="onLoad" :src=img[index].src rel="preload" class="vw-100 contain">
-        <div class="absolute category text-left">
-          <p v-clock class="text-blue font-weight-bold ml-5">{{items[1].text}}</p>
-          <div class="box d-flex align-center justify-space-around">
-            <router-link :to="{ name: 'Category', params: { category: item.route }}" append class="text+lg-h5 text-size text-orange-link" v-for="item in category" :key="item.name">{{ item.name }}</router-link>
-          </div>
+          <v-container v-if="!isLoaded" class="d-flex justify-center">
+            <v-progress-circular
+              :size="100"
+              color="primary"
+              indeterminate
+            ></v-progress-circular>
+          </v-container>
+          <template v-else>
+            <img v-show="isLoaded" @load="onLoad" :src=img[index].src rel="preload" class="vw-100 contain">
+            <div class="absolute category text-left">
+            <p v-clock class="text-blue font-weight-bold ml-5">{{items[1].text}}</p>
+            <div class="box d-flex align-center justify-space-around">
+              <router-link :to="{ name: 'Category', params: { category: item.route }}" append class="text+lg-h5 text-size text-orange-link" v-for="item in category" :key="item.name">{{ item.name }}</router-link>
+            </div>
+            </div>
+          </template>
         </div>
-      </div>
       <v-row class="ma-auto margin-lg pa-sm-10">
         <v-col cols="12">
           <v-breadcrumbs v-if="products.length" :items="items" class="breadcrumbs" large>
@@ -66,7 +75,7 @@ export default {
           to: '/'
         },
         {
-          text: 'navigation',
+          text: '',
           disabled: false,
           to: '/:navigation',
           exact: true
