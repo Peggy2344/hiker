@@ -95,10 +95,10 @@ export const GetHotSale = async (req, res) => {
   res.status(200).send({ success: true, message: 'success', result })
 }
 export const postComment = async (req, res) => {
-  // if (req.session.user === undefined) {
-  //   res.status(401).send({ success: false, message: '未登入' })
-  //   return
-  // }
+  if (req.session.user === undefined) {
+    res.status(401).send({ success: false, message: '未登入' })
+    return
+  }
   if (!req.headers['content-type'].includes('application/json')) {
     res.status(400).send({ success: false, message: '格式錯誤' })
   }
@@ -107,6 +107,7 @@ export const postComment = async (req, res) => {
     return res.status(400).send({ success: false, message: '您已留過評論' })
   }
   try {
+    req.body.releaseDate = Date.now()
     const result = await product.findByIdAndUpdate(req.params.productId, {
       $push: {
         comments: req.body
@@ -208,6 +209,7 @@ export const postQuestion = async (req, res) => {
     res.status(400).send({ success: false, message: '格式錯誤' })
   }
   try {
+    req.body.releaseDate = Date.now()
     const result = await product.findByIdAndUpdate(req.params.productId, {
       $push: {
         questions: req.body
