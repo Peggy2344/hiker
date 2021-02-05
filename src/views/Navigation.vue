@@ -11,7 +11,6 @@
               indeterminate
             ></v-progress-circular>
           </v-container>
-          <template v-else>
             <img @load="onLoad" :src=img[index].src rel="preload" class="vw-100 contain">
             <div class="absolute category text-left">
             <p v-clock class="text-blue font-weight-bold ml-5">{{items[1].text}}</p>
@@ -19,7 +18,6 @@
               <router-link :to="{ name: 'Category', params: { category: item.route }}" append class="text+lg-h5 text-size text-orange-link" v-for="item in category" :key="item.name">{{ item.name }}</router-link>
             </div>
             </div>
-          </template>
         </div>
       <v-row class="ma-auto margin-lg pa-sm-10">
         <v-col cols="12">
