@@ -185,8 +185,7 @@
             class="text-center"
           >
             <v-btn
-              color="words"
-              dark
+              color="primary"
               v-on="on"
               class="width-80"
               @click.stop.prevent="itemdetail.status === 'create' ? submitHandler() : editHandler()"
