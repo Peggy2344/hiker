@@ -4,7 +4,7 @@
     <div class="pa-0 ma-0 vw-100">
       <div class="vw-100 relative">
         <div class="vw-100 relative mb-15 mb-sm-5">
-        <img :src="require('../assets/mammut.jpg')" rel="preload" class="vw-100 contain">
+        <img :src=img[index].src rel="preload" class="vw-100 contain">
         <div class="absolute category text-left">
           <p class="text-blue font-weight-bold ml-5">Category</p>
           <div class="box d-flex align-center justify-space-around">
@@ -37,6 +37,7 @@
             </v-col>
           </template>
       </v-row>
+      </div>
     </div>
     <Footer />
   </v-app>
@@ -69,7 +70,19 @@ export default {
           to: '/:navigation',
           exact: true
         }
-      ]
+      ],
+      img: [
+        {
+          src: require('../assets/mammut.jpg')
+        },
+        {
+          src: require('../assets/womenBg.jpg')
+        },
+        {
+          src: require('../assets/equipment.jpg')
+        }
+      ],
+      index: 0
     }
   },
   computed: {
@@ -96,6 +109,12 @@ export default {
           this.products = res.data.result
           this.items[1].text = this.products[0].navigation
           this.items[1].to = { name: 'Navigation', params: { navigation } }
+          console.log(navigation)
+          this.index =
+          navigation === 'men'
+            ? 0 : navigation === 'women'
+              ? 1
+              : 2
         }
         this.isLoading = false
       } catch (error) {

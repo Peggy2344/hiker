@@ -288,7 +288,7 @@ export default {
     handleScroll (event) {
       this.navBackground = window.scrollY > 200 ? 'white' : 'transparent'
       // this.logoSrc = window.scrollY < 200 && this.$route.path === '/' ? require('../assets/logo-white.png') : require('../assets/logo.png')
-      if (window.scrollY < 200 && this.$route.path === '/') {
+      if (window.scrollY < 200 && (this.$route.path === '/' || this.$route.path === '/navigation/women')) {
         this.logoSrc = require('../assets/logo-white.png')
         this.black = false
         this.icon = 'white'
