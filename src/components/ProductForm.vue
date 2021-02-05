@@ -313,11 +313,6 @@ export default {
     },
     formHandler () {
       const formData = new FormData()
-      // const detailsObj = {
-      //   size: '',
-      //   color: '',
-      //   inStock: ''
-      // }
       for (const key in this.itemdetail) {
         if (key === 'productImg') {
           this.itemdetail.productImg.forEach(item => {
