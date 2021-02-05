@@ -1,44 +1,44 @@
 <template>
   <v-app app class="home">
     <Navbar />
-    <div class="pa-0 ma-0 vw-100">
-      <div class="vw-100 relative">
-        <div class="vw-100 relative mb-15 mb-sm-5">
-        <img v-cloak :src=img[index].src rel="preload" class="vw-100 contain">
-        <div class="absolute category text-left">
-          <p class="text-blue font-weight-bold ml-5">{{items[1].text}}</p>
-          <div class="box d-flex align-center justify-space-around">
-            <router-link :to="{ name: 'Category', params: { category: item.route }}" append class="text+lg-h5 text-size text-orange-link" v-for="item in category" :key="item.name">{{ item.name }}</router-link>
+    <template v-if="isLoading">
+      <v-col cols="6" class="col-lg-3 col-md-4 px-1 py-0 mb-10 d-flex justify-center border-bottom"
+          v-for="index in 8"
+          :key="index">
+        <v-skeleton-loader
+          width="100%"
+          class="mb-3"
+          type="card-avatar, article"
+        ></v-skeleton-loader>
+      </v-col>
+    </template>
+    <template v-else>
+      <div class="pa-0 ma-0 vw-100">
+        <div class="vw-100 relative">
+          <div class="vw-100 relative mb-15 mb-sm-5">
+          <img v-cloak :src=img[index].src rel="preload" class="vw-100 contain">
+          <div class="absolute category text-left">
+            <p class="text-blue font-weight-bold ml-5">{{items[1].text}}</p>
+            <div class="box d-flex align-center justify-space-around">
+              <router-link :to="{ name: 'Category', params: { category: item.route }}" append class="text+lg-h5 text-size text-orange-link" v-for="item in category" :key="item.name">{{ item.name }}</router-link>
+            </div>
           </div>
         </div>
-      </div>
-      <v-row class="ma-auto margin-lg pa-sm-10">
-        <v-col cols="12">
-          <v-breadcrumbs v-if="products.length" :items="items" class="breadcrumbs" large>
-            <template v-slot:divider>
-              <v-icon>mdi-chevron-right</v-icon>
-            </template>
-          </v-breadcrumbs>
-        </v-col>
-          <template v-if="isLoading">
-            <v-col cols="6" class="col-lg-3 col-md-4 px-1 py-0 mb-10 d-flex justify-center border-bottom"
-                v-for="index in 8"
-                :key="index">
-              <v-skeleton-loader
-                width="100%"
-                class="mb-3"
-                type="card-avatar, article"
-              ></v-skeleton-loader>
-            </v-col>
-          </template>
-          <template v-else>
+        <v-row class="ma-auto margin-lg pa-sm-10">
+          <v-col cols="12">
+            <v-breadcrumbs v-if="products.length" :items="items" class="breadcrumbs" large>
+              <template v-slot:divider>
+                <v-icon>mdi-chevron-right</v-icon>
+              </template>
+            </v-breadcrumbs>
+          </v-col>
             <v-col cols="6" class="col-lg-3 col-md-4 px-1 py-0 mb-10 d-flex justify-center border-bottom height_for_card" v-for="product in products" :key="product._id">
               <ProductCard :product="product" />
             </v-col>
-          </template>
-      </v-row>
+        </v-row>
+        </div>
       </div>
-    </div>
+    </template>
     <Footer />
   </v-app>
 </template>
