@@ -7,6 +7,7 @@ import VueSweetalert2 from 'vue-sweetalert2'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
+import VueGtag from 'vue-gtag'
 import swiper, { Navigation, Pagination, Autoplay } from 'swiper'
 import 'swiper/swiper-bundle.css'
 
@@ -15,6 +16,11 @@ axios.defaults.withCredentials = true
 Vue.use(VueAxios, axios)
 Vue.use(VueSweetalert2)
 Vue.use(VueAwesomeSwiper)
+Vue.use(VueGtag, {
+  config: {
+    id: process.env.VUE_APP_GA
+  }
+})
 swiper.use([Navigation, Pagination, Autoplay])
 
 new Vue({
