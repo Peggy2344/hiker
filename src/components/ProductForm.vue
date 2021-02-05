@@ -169,7 +169,7 @@
               fab
               dark
               small
-              color="words"
+              color="primary"
               max-width="20"
               max-height="20"
               class="delBtn"
@@ -190,8 +190,9 @@
               v-on="on"
               class="width-80"
               @click.stop.prevent="itemdetail.status === 'create' ? submitHandler() : editHandler()"
+              :disabled="isLoading"
             >
-              送出
+              {{ isLoading ? '送出中' : '送出' }}
             </v-btn>
           </v-col>
         </v-row>
@@ -228,6 +229,7 @@ export default {
   },
   data () {
     return {
+      isLoading: false,
       checkbox: false,
       itemdetail: {
         urls: [],
@@ -339,6 +341,7 @@ export default {
     async submitHandler () {
       const formData = this.formHandler()
       try {
+        this.isLoading = true
         const res = await postProduct(formData)
         if (res.data.success) {
           this.$swal({
@@ -347,12 +350,14 @@ export default {
             confirmButtonColor: '#356859',
             title: '上傳成功'
           })
+          this.isLoading = false
           this.itemdetail = { ...this.editItem }
           this.itemdetail.urls = []
           this.itemdetail.productImg = []
           this.$emit('update', res.data.result)
         }
       } catch (error) {
+        this.isLoading = false
         console.log(error)
       }
     },
@@ -360,8 +365,10 @@ export default {
       this.itemdetail.productImg = this.editItem.productImg
       delete this.itemdetail.urls
       try {
+        this.isLoading = true
         const res = await editProduct({ productId: this.editItem._id }, this.itemdetail)
         if (res.data.success) {
+          this.isLoading = false
           this.$swal({
             icon: 'success',
             iconColor: 'brightGreen',
@@ -372,6 +379,7 @@ export default {
           })
         }
       } catch (error) {
+        this.isLoading = false
         console.log(error)
       }
     },

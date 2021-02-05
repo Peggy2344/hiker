@@ -72,8 +72,8 @@ export default {
       this.cart.splice(index, 1)
     },
     fetchData () {
-      this.cartList.forEach(order => {
-        getProduct({ productId: order.productId })
+      this.cartList.forEach(async order => {
+        await getProduct({ productId: order.productId })
           .then((res) => {
             if (!res.data.result.length) return
             const { productName, price, brand, productImg, _id, details } = res.data.result[0]
