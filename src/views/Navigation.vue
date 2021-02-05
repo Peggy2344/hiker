@@ -4,9 +4,9 @@
     <div class="pa-0 ma-0 vw-100">
       <div class="vw-100 relative">
         <div class="vw-100 relative mb-15 mb-sm-5">
-        <img v-cloak :src=img[index].src rel="preload" class="vw-100 contain">
+        <img v-show="isLoaded" @load="onLoad" :src=img[index].src rel="preload" class="vw-100 contain">
         <div class="absolute category text-left">
-          <p class="text-blue font-weight-bold ml-5">{{items[1].text}}</p>
+          <p v-clock class="text-blue font-weight-bold ml-5">{{items[1].text}}</p>
           <div class="box d-flex align-center justify-space-around">
             <router-link :to="{ name: 'Category', params: { category: item.route }}" append class="text+lg-h5 text-size text-orange-link" v-for="item in category" :key="item.name">{{ item.name }}</router-link>
           </div>
@@ -56,6 +56,7 @@ export default {
   },
   data () {
     return {
+      isLoaded: false,
       isLoading: true,
       products: [],
       items: [
@@ -120,6 +121,9 @@ export default {
       } catch (error) {
         console.log(error)
       }
+    },
+    onLoad () {
+      this.isLoaded = true
     }
   },
   beforeRouteUpdate (to, from, next) {
