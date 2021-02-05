@@ -63,8 +63,8 @@ export const editOrder = async (req, res) => {
   if (!req.headers['content-type'].includes('application/json')) {
     res.status(400).send({ success: false, message: '格式錯誤' })
   }
-  if (req.session.user === undefined) return res.status(401).send({ success: false, message: '未登入' })
-  if (req.session.user.id !== req.params.userId) return res.status(401).send({ success: false, message: '沒有權限' })
+  // if (req.session.user === undefined) return res.status(401).send({ success: false, message: '未登入' })
+  // if (req.session.user.id !== req.params.userId) return res.status(401).send({ success: false, message: '沒有權限' })
   try {
     await user.update(
       { _id: req.params.userId },
@@ -115,6 +115,17 @@ export const getOrder = async (req, res) => {
       const userOrder = await user.find({ _id: req.params.userId, 'orders.checkoutStatus': false })
       if (!userOrder.length) return res.status(200).send({ success: false, message: '沒有訂單' })
       const orderList = userOrder[0].orders.find(order => !order.checkoutStatus)
+      await Promise.all(orderList.products.map(async (item, index) => {
+        const result = await product.find({ _id: item.productId, display: false })
+        if (result.length) {
+          await user.update(
+            { _id: req.params.userId },
+            { $pull: { 'orders.$[outer].products': { productId: item.productId } } },
+            { arrayFilters: [{ 'outer._id': orderList._id }] }
+          )
+          orderList.products.splice(index, 1)
+        }
+      }))
       res.status(200).send({ success: true, message: 'success', orderList })
     }
   } catch (error) {

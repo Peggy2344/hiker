@@ -128,6 +128,10 @@ const productSchema = new Schema({
   },
   questions: {
     type: [questionSchema]
+  },
+  display: {
+    type: Boolean,
+    default: true
   }
 })
 

@@ -15,7 +15,7 @@ const transNavigation = {
 export const getProducts = async (req, res) => {
   try {
     if (req.query.navigation && req.query.category) {
-      const products = await product.find({ navigationRoute: req.query.navigation }, '-details.inStock -inStock -comments -questions')
+      const products = await product.find({ navigationRoute: req.query.navigation, display: true }, '-details.inStock -inStock -comments -questions')
       const result = products.filter(item => {
         return item.categoryRoute === req.query.category
       })
@@ -26,18 +26,18 @@ export const getProducts = async (req, res) => {
       if (!req.query.navigation.match(isEnglish)) {
         req.query.navigation = transNavigation[req.query.navigation]
       }
-      const result = await product.find({ navigationRoute: req.query.navigation }, '-details.inStock -inStock -comments -questions')
+      const result = await product.find({ navigationRoute: req.query.navigation, display: true }, '-details.inStock -inStock -comments -questions')
       return res.status(200).send({ success: true, message: 'Success', result })
     }
     if (req.query.brand) {
-      const result = await product.find({ brand: req.query.brand }, '-details.inStock -inStock -comments -questions')
+      const result = await product.find({ brand: req.query.brand, display: true }, '-details.inStock -inStock -comments -questions')
       return res.status(200).send({ success: true, message: 'Success', result })
     }
     let result = ''
     if (req.session.user.role === 'admin') {
       result = await product.find({}, '-comments -questions')
     } else {
-      result = await product.find({}, '-details.inStock -inStock -comments -questions')
+      result = await product.find({ display: true }, '-details.inStock -inStock -comments -questions')
     }
     res.status(200).send({ success: true, message: 'Success', result })
   } catch (error) {
@@ -47,8 +47,12 @@ export const getProducts = async (req, res) => {
 }
 export const searchByProductId = async (req, res) => {
   try {
-    const result = await product.find({ _id: req.params.productId }, '-details.inStock -inStock -comments -questions')
-    res.status(200).send({ success: true, message: 'Success', result })
+    const result = await product.find({ _id: req.params.productId, display: true }, '-details.inStock -inStock -comments -questions')
+    if (!result) {
+      res.status(400).send({ success: true, message: '找不到此商品' })
+    } else {
+      res.status(200).send({ success: true, message: 'Success', result })
+    }
   } catch (error) {
     console.log(error)
     res.status(500).send({ success: false, message: '伺服器錯誤' })
@@ -77,8 +81,7 @@ export const getFile = async (req, res) => {
     // heroku情況下
     axios({
       method: 'GET',
-      url: 'http://' + process.env.FTP_HOST + '/' + process.env.FTP_USER + '/' + req.params.file,
-      responseType: 'stream'
+      url: 'http://' + process.env.FTP_HOST + '/' + process.env.FTP_USER + '/' + req.params.file
     }).then(response => {
       response.data.pipe(res)
     }).catch((error) => {
@@ -103,7 +106,6 @@ export const postComment = async (req, res) => {
     return res.status(400).send({ success: false, message: '您已留過評論' })
   }
   try {
-    req.body.releaseDate = Date.now()
     const result = await product.findByIdAndUpdate(req.params.productId, {
       $push: {
         comments: req.body
@@ -205,7 +207,6 @@ export const postQuestion = async (req, res) => {
     res.status(400).send({ success: false, message: '格式錯誤' })
   }
   try {
-    req.body.releaseDate = Date.now()
     const result = await product.findByIdAndUpdate(req.params.productId, {
       $push: {
         questions: req.body
