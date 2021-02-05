@@ -5,7 +5,7 @@
         <v-row justify="center">
           <v-col
             cols="10"
-            sm="5"
+            sm="8"
           >
             <v-text-field
               v-model="itemdetail.productName"
@@ -15,7 +15,18 @@
           </v-col>
           <v-col
             cols="10"
-            sm="5"
+            sm="3"
+          >
+            <v-select
+              v-model="itemdetail.display"
+              label="是否上架"
+              required
+              :items="display"
+            ></v-select>
+          </v-col>
+          <v-col
+            cols="10"
+            sm="4"
           >
             <v-select
               v-model="itemdetail.brand"
@@ -26,7 +37,7 @@
           </v-col>
           <v-col
             cols="10"
-            sm="5"
+            sm="3"
           >
             <v-select
               v-model="itemdetail.navigation"
@@ -37,7 +48,7 @@
           </v-col>
           <v-col
             cols="10"
-            sm="5"
+            sm="4"
           >
             <v-select
               v-model="itemdetail.category"
@@ -174,13 +185,13 @@
             class="text-center"
           >
             <v-btn
-              :disabled="isLoading"
-              color="primary"
+              color="words"
+              dark
               v-on="on"
               class="width-80"
               @click.stop.prevent="itemdetail.status === 'create' ? submitHandler() : editHandler()"
             >
-              {{ isLoading ? '送出中' : '送出' }}
+              送出
             </v-btn>
           </v-col>
         </v-row>
@@ -210,7 +221,8 @@ export default {
         picture: '',
         status: 'create',
         productImg: [],
-        details: []
+        details: [],
+        display: true
       })
     }
   },
@@ -227,7 +239,8 @@ export default {
         inStock: this.editItem.inStock,
         status: this.editItem.status,
         productImg: this.editItem.productImg,
-        details: this.editItem.details
+        details: this.editItem.details,
+        display: this.editItem.display
       },
       detail: {
         size: '',
@@ -239,7 +252,16 @@ export default {
       categoryItems: [],
       classificationData: [],
       details: [],
-      isLoading: false
+      display: [
+        {
+          text: '是',
+          value: true
+        },
+        {
+          text: '否',
+          value: false
+        }
+      ]
     }
   },
   methods: {
@@ -317,7 +339,6 @@ export default {
     async submitHandler () {
       const formData = this.formHandler()
       try {
-        this.isLoading = true
         const res = await postProduct(formData)
         if (res.data.success) {
           this.$swal({
@@ -326,14 +347,12 @@ export default {
             confirmButtonColor: '#356859',
             title: '上傳成功'
           })
-          this.isLoading = false
           this.itemdetail = { ...this.editItem }
           this.itemdetail.urls = []
           this.itemdetail.productImg = []
           this.$emit('update', res.data.result)
         }
       } catch (error) {
-        this.isLoading = false
         console.log(error)
       }
     },
@@ -341,10 +360,8 @@ export default {
       this.itemdetail.productImg = this.editItem.productImg
       delete this.itemdetail.urls
       try {
-        this.isLoading = true
         const res = await editProduct({ productId: this.editItem._id }, this.itemdetail)
         if (res.data.success) {
-          this.isLoading = false
           this.$swal({
             icon: 'success',
             iconColor: 'brightGreen',
@@ -355,7 +372,6 @@ export default {
           })
         }
       } catch (error) {
-        this.isLoading = false
         console.log(error)
       }
     },

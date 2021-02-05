@@ -11,7 +11,7 @@
       <v-col cols="12" class="col-sm-6 col-md-5 col-lg-5 d-flex align-center justify-space-around">
         <div class="d-flex flex-column">
           <div class="overline mb-1">訂單編號</div>
-          <router-link :to="{ name: 'AdminOrderDetail', params: { orderId: order._id, userId  }}">
+          <router-link :to="{ name: 'AdminOrderDetail', params: { orderId: order._id, userId  }}" target='_blank'>
             <div class="overline mb-1"> {{order._id.slice(-8)}}</div>
           </router-link>
         </div>
@@ -30,7 +30,13 @@
             <option value="已完成">已完成</option>
           </select>
         </div>
-        <div v-else class="col-7 overline mb-1">狀態: {{order.status}}</div>
+        <div v-else
+        class="col-7 overline mb-1 font-weight-bold"
+        :class="{ 'confirm--text': order.status === '處理中',
+                  'successBlue--text': order.status === '配送中',
+                  'successGreen--text': order.status === '已完成'
+                  }"
+        >狀態: {{order.status}}</div>
         <div class="mx-lg-5 col-7">
           <template v-if="edit">
             <v-btn
@@ -128,5 +134,8 @@ export default {
 .select{
   width: 50px;
   border: 1px solid var(--v-primary-base);
+}
+.status{
+  color: var(--v-confirm-base);
 }
 </style>

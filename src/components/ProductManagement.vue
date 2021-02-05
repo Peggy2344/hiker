@@ -33,7 +33,7 @@
           color="primary"
           indeterminate
         ></v-progress-circular>
-      </v-container>
+    </v-container>
       <v-data-table
       v-if="!isLoading"
       :headers="headers"
@@ -43,6 +43,13 @@
         'items-per-page-text':'每頁顯示數量'
       }"
     >
+      <template v-slot:item.display="{ item }">
+        <div
+        class="font-weight-bold"
+        :class="{ 'successGreen--text': item.display, 'confirm--text': !item.display }">
+          {{ item.display ? '上架': '未上架' }}
+        </div>
+      </template>
       <template v-slot:item.productImg[0].file="{ item }">
         <div class="p-2">
           <img :src="env + '/products/file/' + item.productImg[0].file" width="100px">
@@ -131,6 +138,7 @@ export default {
         { text: '種類', value: 'navigation' },
         { text: '類別', value: 'category' },
         { text: '價格', value: 'price' },
+        { text: '上架', value: 'display' },
         { text: '商品圖片', value: 'productImg[0].file' },
         { text: 'Actions', value: 'actions', sortable: false }
       ],

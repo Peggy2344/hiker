@@ -41,7 +41,7 @@ export default {
   data () {
     return {
       userDatas: [],
-      items: ['使用者', '訂單成立時間(由新至舊)'],
+      items: ['使用者', '訂單成立時間(由新至舊)', '訂單狀態'],
       selection: '使用者',
       isLoading: true
     }
@@ -57,9 +57,20 @@ export default {
             ary.push({ _id: item._id, orders: [order] })
           })
         })
-        ary.sort((a, b) => {
-          return new Date(b.orders[0].date) - new Date(a.orders[0].date)
-        })
+        if (this.selection === '訂單成立時間(由新至舊)') {
+          ary.sort((a, b) => {
+            return new Date(b.orders[0].date) - new Date(a.orders[0].date)
+          })
+        } else {
+          const status = {
+            處理中: 1,
+            配送中: 2,
+            已完成: 3
+          }
+          ary.sort((a, b) => {
+            return status[a.orders[0].status] - status[b.orders[0].status]
+          })
+        }
       }
       return ary
     }

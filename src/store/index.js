@@ -138,8 +138,12 @@ export default new Vuex.Store({
       if (!result.data.orderList) {
         commit('SET_CART', { cartList: [], orderId: '' })
       } else {
-        const cartList = result.data.orderList.products
+        let cartList = []
+        if (result.data.orderList.products.length) {
+          cartList = result.data.orderList.products
+        }
         const orderId = result.data.orderList._id
+        console.log(cartList)
         window.localStorage.setItem('hiker-cart', JSON.stringify(cartList))
         commit('SET_CART', { cartList, orderId })
       }

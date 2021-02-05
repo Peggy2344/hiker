@@ -24,6 +24,8 @@ export default new Vuetify({
         brightGreen: '#bef264',
         help: '#4cc9f0',
         confirm: '#ed5e68',
+        successGreen: '#7bd088',
+        successBlue: '#4cbaff',
         cancel: '#8388a4'
       }
     }

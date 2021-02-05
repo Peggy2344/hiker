@@ -4,7 +4,7 @@
   <!-- sectopn01 -->
   <v-row class="d-flex justify-space-around align-start flex ma-0 mx-lg-10 mt-15">
     <v-col cols="12" class="h-10 mt-5">
-      <v-breadcrumbs v-if="links[3].text" :items="links" large>
+      <v-breadcrumbs v-if="links.length" :items="links" large>
         <template v-slot:divider>
           <v-icon>mdi-chevron-right</v-icon>
         </template>
@@ -257,7 +257,7 @@ export default {
           exact: true
         },
         {
-          text: '',
+          text: 'product',
           disabled: true
         }
       ],
@@ -340,14 +340,14 @@ export default {
     commentHandler () {
       if (!this.user.id) {
         this.$swal.fire({
-          text: '請先登入再留言!',
           reverseButtons: true,
+          title: '請先登入再留言!',
           icon: 'warning',
           showCancelButton: true,
-          confirmButtonColor: '#ed5e68',
-          cancelButtonColor: '#8388a4',
-          confirmButtonText: '登入',
-          cancelButtonText: '取消'
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          cancelButtonText: '取消',
+          confirmButtonText: '登入'
         }).then((result) => {
           if (result.isConfirmed) {
             this.$router.push({ name: 'Login' })
@@ -547,7 +547,6 @@ export default {
   }
   .ordercard{
     position: relative;
-    right: 0;
   }
 }
 </style>
