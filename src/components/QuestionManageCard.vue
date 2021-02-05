@@ -11,13 +11,12 @@
       <v-col cols="12" class="d-flex align-center justify-center justify-lg-start flex-wrap">
         <div class="overline mb-1 col-6 col-lg-2"> {{question.userName}}</div>
         <div class="overline mb-1 col-6 col-lg-4"> Q : {{question.message}}</div>
-        <div class=" col-6 col-lg-6 d-flex align-center">
-          <div class="overline"> 回覆狀態 : </div>
+        <div class=" col-12 col-lg-6 d-flex flex-wrap align-center">
+          <div class="overline col-12"> 回覆狀態 : </div>
           <template v-if="!question.reply">
             <div class="overline mx-5">尚未回覆</div>
-            <div>
+            <div v-if="!reply">
               <v-btn
-                v-if="!reply"
                 small
                 outlined
                 class="reply_btn"
@@ -59,8 +58,8 @@
             </template>
           </template>
           <template v-else>
-            <div class="overline mb-1 col-6 col-lg-4">{{question.reply}}</div>
-            <div class="overline mb-1 col-6 col-lg-4">{{getTime(question.replyDate)}}</div>
+            <div class="overline mb-1 col-lg-4">{{question.reply}}</div>
+            <div class="overline mb-1 col-lg-12">{{getTime(question.replyDate)}}</div>
           </template>
         </div>
       </v-col>
