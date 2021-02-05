@@ -4,7 +4,7 @@
     <div class="pa-0 ma-0 vw-100">
       <div class="vw-100 relative">
         <div class="vw-100 relative mb-15 mb-sm-5">
-          <v-container v-if="!isLoaded" class="d-flex justify-center">
+          <v-container v-if="!isLoaded" class="d-flex align-center justify-center">
             <v-progress-circular
               :size="100"
               color="primary"
@@ -12,7 +12,7 @@
             ></v-progress-circular>
           </v-container>
           <template v-else>
-            <img v-show="isLoaded" @load="onLoad" :src=img[index].src rel="preload" class="vw-100 contain">
+            <img @load="onLoad" :src=img[index].src rel="preload" class="vw-100 contain">
             <div class="absolute category text-left">
             <p v-clock class="text-blue font-weight-bold ml-5">{{items[1].text}}</p>
             <div class="box d-flex align-center justify-space-around">
