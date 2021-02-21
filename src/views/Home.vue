@@ -60,9 +60,9 @@
       </div>
       <NewItem />
     </div>
-    <v-container class="d-flex flex-wrap justify-center homePage">
+    <v-container class="d-flex flex-wrap justify-center homePage" data-aos="fade-up" data-aos-duration="500" data-aos-offset="300">
       <v-row id="row1" class="col-12 col-lg-6 d-flex flex-wrap justify-center">
-        <v-col cols="12" class="d-flex justify-center" data-aos="fade-up" data-aos-duration="500" data-aos-offset="350">
+        <v-col cols="12" class="d-flex justify-center">
           <div
             class="col-12 d-flex flex-column flex-sm-row align-center justify-space-around bg-1 pa-10"
           >
@@ -91,7 +91,7 @@
             </router-link>
           </div>
         </v-col>
-        <v-col cols="12" class="d-flex justify-center" data-aos="fade-left" data-aos-duration="500" data-aos-offset="350">
+        <v-col cols="12" class="d-flex justify-center">
           <div
             class="col-12 d-flex flex-column flex-sm-row align-center justify-space-around bg-1 pa-10"
           >
@@ -122,7 +122,7 @@
         </v-col>
       </v-row>
       <v-row id="row2" class="col-12 col-lg-6 d-flex flex-wrap justify-center">
-        <v-col cols="12" class="d-flex justify-center" data-aos="fade-left" data-aos-duration="500" data-aos-offset="350">
+        <v-col cols="12" class="d-flex justify-center">
           <div
             class="col-12 d-flex flex-column flex-sm-row align-center justify-space-around bg-2 pa-10 pr-5"
           >
@@ -151,7 +151,7 @@
             </router-link>
           </div>
         </v-col>
-        <v-col cols="12" data-aos="fade-up" data-aos-duration="500" data-aos-offset="350">
+        <v-col cols="12">
           <div
             class="col-12 d-flex flex-column flex-sm-row align-center justify-sm-space-around bg-2 pa-10"
           >
@@ -182,7 +182,7 @@
         </v-col>
       </v-row>
     </v-container>
-    <v-container class="my-15 mx-auto">
+    <v-container class="my-15 mx-auto" data-aos="fade-up" data-aos-duration="500" data-aos-offset="300">
       <div class="d-flex justify-center">
         <h3 class="ma-lg-5 mb-lg-15 mb-15 mx-5 px-5">
           <span class="new-title text-h4 text-lg-h3 font-weight-bold highlight"
@@ -190,7 +190,7 @@
           >
         </h3>
       </div>
-      <div class="d-flex justify-space-around flex-wrap" data-aos="fade-up" data-aos-duration="500" data-aos-offset="300">
+      <div class="d-flex justify-space-around flex-wrap">
         <div class="col-4 col-sm-2 d-flex justify-center">
           <router-link
             :to="{
