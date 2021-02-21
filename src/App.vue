@@ -39,11 +39,6 @@ export default {
         })
         .catch((error) => {
           console.log(error)
-          this.$swal({
-            icon: 'error',
-            title: '錯誤',
-            text: '發生錯誤'
-          })
           this.$store.commit('logout')
           if (this.$route.path !== '/') {
             this.$router.push('/')

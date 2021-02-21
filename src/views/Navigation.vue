@@ -56,7 +56,6 @@ export default {
   },
   data () {
     return {
-      isLoaded: false,
       isLoading: true,
       products: [],
       items: [
@@ -124,9 +123,6 @@ export default {
       } catch (error) {
         console.log(error)
       }
-    },
-    onLoad () {
-      this.isLoaded = true
     }
   },
   beforeRouteUpdate (to, from, next) {

@@ -356,7 +356,7 @@ export default {
   position: relative;
   flex: 0.5 0.5;
 }
-.list-item:hover::before{
+/* .list-item:hover::before{
   content: '[';
   position: absolute;
   left: 0;
@@ -365,6 +365,25 @@ export default {
   content: ']';
   position: absolute;
   right: 0;
+} */
+.list-item::before {
+  content: "" ;
+  position: absolute;
+  top:0 ;
+  left: 0;
+  background: var(--v-brightGreen-base);
+  display:block;
+  width:100%;
+  height:100%;
+  opacity: 0.8;
+  z-index:-1;
+  transition :transform .5s;
+  transform :scaleX(0);
+  transform-origin:left ;
+ }
+ .list-item:hover::before{
+  transform :scaleX(1);
+  transform-origin :right;
 }
 .list_white {
   color: var(--v-white-base);
