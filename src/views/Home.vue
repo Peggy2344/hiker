@@ -62,7 +62,7 @@
     </div>
     <v-container class="d-flex flex-wrap justify-center homePage">
       <v-row id="row1" class="col-12 col-lg-6 d-flex flex-wrap justify-center">
-        <v-col cols="12" class="d-flex justify-center" data-aos="fade-up" data-aos-duration="500" data-aos-offset="300">
+        <v-col cols="12" class="d-flex justify-center" data-aos="fade-up" data-aos-once="true" data-aos-duration="700" data-aos-offset="400">
           <div
             class="col-12 d-flex flex-column flex-sm-row align-center justify-space-around bg-1 pa-10"
           >
@@ -91,7 +91,7 @@
             </router-link>
           </div>
         </v-col>
-        <v-col cols="12" class="d-flex justify-center" data-aos="fade-up" data-aos-duration="500" data-aos-offset="300">
+        <v-col cols="12" class="d-flex justify-center" data-aos="fade-up" data-aos-once="true" data-aos-duration="700" data-aos-offset="400">
           <div
             class="col-12 d-flex flex-column flex-sm-row align-center justify-space-around bg-1 pa-10"
           >
@@ -122,7 +122,7 @@
         </v-col>
       </v-row>
       <v-row id="row2" class="col-12 col-lg-6 d-flex flex-wrap justify-center">
-        <v-col cols="12" class="d-flex justify-center" data-aos="fade-left" data-aos-duration="500" data-aos-offset="300">
+        <v-col cols="12" class="d-flex justify-center" data-aos="fade-left" data-aos-once="true" data-aos-duration="700" data-aos-offset="400">
           <div
             class="col-12 d-flex flex-column flex-sm-row align-center justify-space-around bg-2 pa-10 pr-5"
           >
@@ -151,7 +151,7 @@
             </router-link>
           </div>
         </v-col>
-        <v-col cols="12" data-aos="fade-left" data-aos-duration="500" data-aos-offset="300">
+        <v-col cols="12" data-aos="fade-left" data-aos-duration="700" data-aos-once="true" data-aos-offset="400">
           <div
             class="col-12 d-flex flex-column flex-sm-row align-center justify-sm-space-around bg-2 pa-10"
           >
@@ -190,7 +190,7 @@
           >
         </h3>
       </div>
-      <div class="d-flex justify-space-around flex-wrap" data-aos="fade-up" data-aos-duration="500" data-aos-offset="300">
+      <div class="d-flex justify-space-around flex-wrap" data-aos="fade-up" data-aos-once="true" data-aos-duration="700" data-aos-offset="300">
         <div class="col-4 col-sm-2 d-flex justify-center">
           <router-link
             :to="{
