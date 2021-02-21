@@ -7,27 +7,6 @@
     width="100%"
     elevation=0
   >
-    <!-- <template v-if="productImg.length">
-      <router-link :to="{name: 'ProductDetail', params: {product_id: product._id} }" class="h-50 d-flex justify-center align-center my-lg-5">
-        <v-img
-          max-height="300"
-          contain
-          class="img-height"
-          :src="showImg"
-        ></v-img>
-      </router-link>
-      <v-row class="align-center justify-center d-flex mt-lg-5">
-        <v-col cols="3" v-for="(img, index) in productImg" :key="img">
-          <v-img
-            max-height="50"
-            contain
-            class="pointer border"
-            :src="img"
-            @click="changePicHandler(index)"
-          ></v-img>
-        </v-col>
-      </v-row>
-    </template> -->
     <ProductImage class="h-70" v-if="product" :product="product"/>
     <v-card-text class="mt-3 pt-0 h-30 d-flex flex-column justify-center">
       <v-row

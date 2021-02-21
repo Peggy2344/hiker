@@ -2,7 +2,7 @@
   <div class="pa-0 ma-0 vw-100">
     <v-row class="justify-center">
       <v-col class="col-lg-12 col-sm-12">
-        <ScrollItem :hotsales="newItem" :display="'newItem'"/>
+        <ScrollItem :isLoading.sync="isLoading" :hotsales="newItem" :display="'newItem'"/>
       </v-col>
     </v-row>
   </div>
@@ -17,12 +17,14 @@ export default {
   },
   data () {
     return {
+      isLoading: true,
       newItem: []
     }
   },
   async mounted () {
     const res = await getHotsale()
     this.newItem = res.data.result
+    this.isLoading = false
   }
 }
 </script>
