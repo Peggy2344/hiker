@@ -19,7 +19,7 @@ jobs:
 
       # 步驟二：編譯及部署
       - name: buildAndDeploy
-        uses: JamesIves/github-pages-deploy-action@v4.3.3
+        uses: JamesIves/github-pages-deploy-action@releases/v2
         # 步驟設定
         env:
           GITHUB_TOKEN : ${{ secrets.GITHUB_TOKEN }}
